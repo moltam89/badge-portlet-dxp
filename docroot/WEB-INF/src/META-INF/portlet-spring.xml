@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.liferay.hu.badge.service.service.impl.BadgeLocalServiceImpl" id="com.liferay.hu.badge.service.service.BadgeLocalService" />
+	<bean class="com.liferay.hu.badge.service.service.impl.BadgeServiceImpl" id="com.liferay.hu.badge.service.service.BadgeService" />
+	<bean class="com.liferay.hu.badge.service.service.persistence.impl.BadgePersistenceImpl" id="com.liferay.hu.badge.service.service.persistence.BadgePersistence" parent="basePersistence" />
+</beans>
