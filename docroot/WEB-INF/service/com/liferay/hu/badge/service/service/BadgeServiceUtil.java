@@ -41,6 +41,12 @@ public class BadgeServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.BadgeServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean addBadge(java.util.Date date, long fromUserId,
+		long toUserId, int badgeType, java.lang.String description) {
+		return getService()
+				   .addBadge(date, fromUserId, toUserId, badgeType, description);
+	}
+
 	public static java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
@@ -54,6 +60,15 @@ public class BadgeServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges() {
+		return getService().getBadges();
+	}
+
+	public static java.util.List<com.liferay.hu.badge.service.model.Badge> getBadges(
+		int badgeType) {
+		return getService().getBadges(badgeType);
 	}
 
 	public static void clearService() {

@@ -30,6 +30,20 @@ public class BadgeServiceClpInvoker {
 		_methodName24 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes24 = new String[] {  };
+
+		_methodName29 = "addBadge";
+
+		_methodParameterTypes29 = new String[] {
+				"java.util.Date", "long", "long", "int", "java.lang.String"
+			};
+
+		_methodName31 = "getBadges";
+
+		_methodParameterTypes31 = new String[] {  };
+
+		_methodName32 = "getBadges";
+
+		_methodParameterTypes32 = new String[] { "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -39,9 +53,34 @@ public class BadgeServiceClpInvoker {
 			return BadgeServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName29.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+			return BadgeServiceUtil.addBadge((java.util.Date)arguments[0],
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Integer)arguments[3]).intValue(),
+				(java.lang.String)arguments[4]);
+		}
+
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+			return BadgeServiceUtil.getBadges();
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			return BadgeServiceUtil.getBadges(((Integer)arguments[0]).intValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
 }

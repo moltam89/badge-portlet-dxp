@@ -16,6 +16,8 @@ package com.liferay.hu.badge.service.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.hu.badge.service.model.Badge;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -23,7 +25,11 @@ import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.InvokableService;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Provides the remote service interface for Badge. Methods of this
@@ -47,6 +53,9 @@ public interface BadgeService extends BaseService, InvokableService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BadgeServiceUtil} to access the badge remote service. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.BadgeServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public boolean addBadge(Date date, long fromUserId, long toUserId,
+		int badgeType, java.lang.String description);
+
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
@@ -58,4 +67,10 @@ public interface BadgeService extends BaseService, InvokableService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Badge> getBadges();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Badge> getBadges(int badgeType);
 }
