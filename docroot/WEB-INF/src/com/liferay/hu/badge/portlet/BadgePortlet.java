@@ -11,10 +11,11 @@ import javax.portlet.PortletPreferences;
 import org.apache.log4j.Logger;
 
 import com.liferay.hu.badge.service.service.BadgeServiceUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.User;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class BadgePortlet extends MVCPortlet {

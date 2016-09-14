@@ -1,8 +1,8 @@
 <%@page import="com.liferay.hu.badge.service.service.BadgeServiceUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="com.liferay.portal.service.UserLocalServiceUtil"%>
-<%@page import="com.liferay.portal.model.User"%>
+<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.liferay.hu.badge.service.model.Badge"%>
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@page import="com.liferay.hu.badge.portlet.BadgePortlet"%>

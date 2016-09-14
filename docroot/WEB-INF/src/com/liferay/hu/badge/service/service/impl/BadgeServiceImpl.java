@@ -22,12 +22,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.hu.badge.service.model.Badge;
-import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GroupThreadLocal;
-import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 
 /**
  * The implementation of the badge remote service.
