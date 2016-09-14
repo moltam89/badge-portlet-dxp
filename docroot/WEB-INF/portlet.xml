@@ -4,14 +4,19 @@
 	<portlet>
 		<portlet-name>badge</portlet-name>
 		<display-name>Badge</display-name>
-		<portlet-class>com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>com.liferay.hu.badge.portlet.BadgePortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>edit-template</name>
+			<value>/edit.jsp</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
+			<portlet-mode>EDIT</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Badge</title>
