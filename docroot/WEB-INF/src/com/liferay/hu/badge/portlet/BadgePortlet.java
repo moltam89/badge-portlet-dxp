@@ -2,6 +2,7 @@ package com.liferay.hu.badge.portlet;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -64,7 +65,7 @@ public class BadgePortlet extends MVCPortlet {
 			int day = GetterUtil.getInteger(request.getParameter("assignDay"), -1);
 
 			if ((year > 0) && (month > 0) && (day > 0)) {
-				date = new Date(year, month, day);
+				date = (new GregorianCalendar(year, month, day)).getTime();
 			}
 		}
 
