@@ -32,6 +32,7 @@ This is the <b>Badge v0.01</b> portlet.
 	List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
 	List<Badge> badges = BadgeServiceUtil.getBadges();
 	boolean adminmode = GetterUtil.getBoolean(portletPreferences.getValue("adminmode", "false"), false);
+	boolean selfadminmode = GetterUtil.getBoolean(portletPreferences.getValue("selfadminmode", "false"), false);
 	boolean addthankyou = GetterUtil.getBoolean(portletPreferences.getValue("addthankyou", "false"), false);
 	boolean addrespect = GetterUtil.getBoolean(portletPreferences.getValue("addrespect", "false"), false);
 %>
@@ -46,7 +47,7 @@ This is the <b>Badge v0.01</b> portlet.
 	</aui:fieldset>
 	--%>
 
-	<aui:fieldset label="Restrict Badge Type">
+	<aui:fieldset label="Restrict Badge Type"  helpMessage="restrictbadge-help">
 		<aui:input type="radio" name="restrictbadgetype" value="addthankyou" label="Thank You" checked="<%= addthankyou %>"></aui:input>
 		<aui:input type="radio" name="restrictbadgetype" value="addrespect" label="Respect" checked="<%= addrespect %>"></aui:input>
 	</aui:fieldset>
@@ -58,8 +59,12 @@ This is the <b>Badge v0.01</b> portlet.
 	</aui:fieldset>
 	 --%>
 
-	<aui:fieldset label="Admin Mode">
+	<aui:fieldset label="Admin Mode" helpMessage="admin-help">
 		<aui:input type="checkbox" name="adminmode" label="Admin Mode" checked="<%= adminmode %>"></aui:input>
+	</aui:fieldset>
+
+	<aui:fieldset label="Self Admin Mode" helpMessage="selfadmin-help">
+		<aui:input type="checkbox" name="selfadminmode" label="Self Admin Mode" checked="<%= selfadminmode %>"></aui:input>
 	</aui:fieldset>
 
 	<aui:input type="submit" name="editSubmit" value="Save"></aui:input>

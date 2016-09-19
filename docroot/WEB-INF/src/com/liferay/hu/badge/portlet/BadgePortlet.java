@@ -13,11 +13,10 @@ import org.apache.log4j.Logger;
 
 import com.liferay.hu.badge.service.service.BadgeServiceUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class BadgePortlet extends MVCPortlet {
 
@@ -33,12 +32,18 @@ public class BadgePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 
 		long toUserId = GetterUtil.getLong(request.getParameter("toUser"), -1);
+		_log.error("toUserId:" + toUserId);
+		if (toUserId == -1) {
+			_log.error("toUserId was not sent in request");
+			return;
+		}
+
 		String description = GetterUtil.getString(request.getParameter("description"), StringPool.BLANK);
 
 		User user = (User) request.getAttribute(WebKeys.USER);
 
 		if ((user == null ) || (user.getUserId() <= 0)) {
-			_log.error("user is null or userId <= 0");
+			_log.error("logged in user is null or userId <= 0");
 			return;
 		}
 
@@ -94,7 +99,7 @@ public class BadgePortlet extends MVCPortlet {
 
 	private static String[] editCheckboxParameters =
 		{"showthankyou", "showrespect", 
-		"displayform", "displaybadges", "adminmode"};
+		"displayform", "displaybadges", "adminmode", "selfadminmode"};
 
 	private static String[] editRadioParameters =
 		{"addthankyou", "addrespect"};

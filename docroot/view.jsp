@@ -6,6 +6,7 @@
 <%@page import="com.liferay.hu.badge.service.model.Badge"%>
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@page import="com.liferay.hu.badge.portlet.BadgePortlet"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -40,21 +41,30 @@ This is the <b>Badge v0.01</b> portlet.
 	List<Badge> badges = BadgeServiceUtil.getBadges(badgeType);
 	Calendar today = Calendar.getInstance();
 	boolean isAdminMode = GetterUtil.getBoolean(portletPreferences.getValue("adminmode", "false"), false);
+	boolean isSelfAdminMode = GetterUtil.getBoolean(portletPreferences.getValue("selfadminmode", "false"), false);
+	User loggedInUser = (User) request.getAttribute(WebKeys.USER);
+	long loggedInUserId = -1;
+	if (loggedInUser != null) {
+		loggedInUserId = loggedInUser.getUserId();
+	}
 %>
 
 <portlet:actionURL var="addBadgeURL" name="addBadgeAction"></portlet:actionURL>
 
 <aui:form name="addBadgeForm" action="<%= addBadgeURL %>" method="POST">
 
-	<% if (isAdminMode) {%>
+	<% if (isAdminMode || isSelfAdminMode) {%>
 
 	<liferay-ui:input-date name="assignDate" 
 		dayValue="<%= today.get(Calendar.DAY_OF_MONTH) %>" dayParam="assignDay"
 		monthValue="<%= today.get(Calendar.MONTH) %>" monthParam="assignMonth"
 		yearValue="<%= today.get(Calendar.YEAR) %>" yearParam="assignYear"
 	/>
+	<% } %>
 
+	<% if (isAdminMode) {%>
 	<aui:select name="fromUser">
+		<aui:option value="-1">Select the From user</aui:option>
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
@@ -69,13 +79,16 @@ This is the <b>Badge v0.01</b> portlet.
 	<% } %>
 
 	<aui:select name="toUser">
+		<aui:option value="-1">Select the To user</aui:option>
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
-				String userName = user.getFullName();
-				%>
-				<aui:option value="<%= userId %>"><%= userName %></aui:option>
-				<%
+				if (loggedInUserId != userId) {
+					String userName = user.getFullName();
+					%>
+					<aui:option value="<%= userId %>"><%= userName %></aui:option>
+					<%
+				}
 			}
 		%>
 	</aui:select>
@@ -85,8 +98,7 @@ This is the <b>Badge v0.01</b> portlet.
 	<aui:input type="submit" name="addBadgeSubmit" value="Add Badge"></aui:input>
 </aui:form>
 
-<liferay-ui:search-container total="<%= badges.size() %>"
->
+<liferay-ui:search-container total="<%= badges.size() %>">
 
 	<liferay-ui:search-container-results
 		results="<%=
