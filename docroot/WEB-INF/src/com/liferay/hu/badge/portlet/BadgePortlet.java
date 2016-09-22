@@ -12,9 +12,11 @@ import javax.portlet.PortletPreferences;
 import org.apache.log4j.Logger;
 
 import com.liferay.hu.badge.service.service.BadgeServiceUtil;
+import com.liferay.hu.badge.utils.Emails;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -30,6 +32,7 @@ public class BadgePortlet extends MVCPortlet {
 
 	public void addBadgeAction(ActionRequest request, ActionResponse actionResponse)
 			throws IOException, PortletException {
+		PortalUtil.getCompanyId(request);
 
 		long toUserId = GetterUtil.getLong(request.getParameter("toUser"), -1);
 		_log.error("toUserId:" + toUserId);
@@ -75,6 +78,7 @@ public class BadgePortlet extends MVCPortlet {
 		}
 
 		BadgeServiceUtil.addBadge(date, fromUserId, toUserId, badgeType, description);
+		Emails.notifyUser(toUserId, fromUserId, badgeType, request);
 	}
 
 	public void editPreferencesAction(ActionRequest request, ActionResponse actionResponse)
