@@ -27,34 +27,34 @@ import java.util.Arrays;
 @ProviderType
 public class BadgeServiceClpInvoker {
 	public BadgeServiceClpInvoker() {
-		_methodName24 = "getOSGiServiceIdentifier";
+		_methodName26 = "getOSGiServiceIdentifier";
 
-		_methodParameterTypes24 = new String[] {  };
+		_methodParameterTypes26 = new String[] {  };
 
-		_methodName29 = "addBadge";
+		_methodName31 = "addBadge";
 
-		_methodParameterTypes29 = new String[] {
+		_methodParameterTypes31 = new String[] {
 				"java.util.Date", "long", "long", "int", "java.lang.String"
 			};
 
-		_methodName31 = "getBadges";
+		_methodName33 = "getBadges";
 
-		_methodParameterTypes31 = new String[] {  };
+		_methodParameterTypes33 = new String[] {  };
 
-		_methodName32 = "getBadges";
+		_methodName34 = "getBadges";
 
-		_methodParameterTypes32 = new String[] { "int" };
+		_methodParameterTypes34 = new String[] { "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName24.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
 			return BadgeServiceUtil.getOSGiServiceIdentifier();
 		}
 
-		if (_methodName29.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
 			return BadgeServiceUtil.addBadge((java.util.Date)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -62,25 +62,25 @@ public class BadgeServiceClpInvoker {
 				(java.lang.String)arguments[4]);
 		}
 
-		if (_methodName31.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
 			return BadgeServiceUtil.getBadges();
 		}
 
-		if (_methodName32.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+		if (_methodName34.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
 			return BadgeServiceUtil.getBadges(((Integer)arguments[0]).intValue());
 		}
 
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName24;
-	private String[] _methodParameterTypes24;
-	private String _methodName29;
-	private String[] _methodParameterTypes29;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 	private String _methodName31;
 	private String[] _methodParameterTypes31;
-	private String _methodName32;
-	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
+	private String _methodName34;
+	private String[] _methodParameterTypes34;
 }

@@ -387,11 +387,6 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 		return _badge.getUserId();
 	}
 
-	@Override
-	public void persist() {
-		_badge.persist();
-	}
-
 	/**
 	* Sets the assign date of this badge.
 	*

@@ -17,4 +17,15 @@
 		<field name="fromUserFullName" type="String" />
 		<field name="description" type="String" />
 	</model>
+	<model name="com.liferay.hu.badge.service.model.Subscriber">
+		<field name="subscriberId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="subscriberUserId" type="long" />
+		<field name="badgeType" type="long" />
+	</model>
 </model-hints>

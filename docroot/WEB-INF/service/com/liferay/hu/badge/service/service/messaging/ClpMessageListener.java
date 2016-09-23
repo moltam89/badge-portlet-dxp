@@ -16,9 +16,9 @@ package com.liferay.hu.badge.service.service.messaging;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.hu.badge.service.service.BadgeLocalServiceUtil;
 import com.liferay.hu.badge.service.service.BadgeServiceUtil;
 import com.liferay.hu.badge.service.service.ClpSerializer;
+import com.liferay.hu.badge.service.service.SubscriberServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -39,9 +39,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			BadgeLocalServiceUtil.clearService();
-
 			BadgeServiceUtil.clearService();
+
+			SubscriberServiceUtil.clearService();
 		}
 	}
 }
