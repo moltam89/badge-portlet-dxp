@@ -4,7 +4,7 @@
 	<author>Borkuti Peter</author>
 	<namespace>BadgePortlet</namespace>
 
-	<entity name="Badge" local-service="true" remote-service="true">
+	<entity name="Badge" local-service="false" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -42,6 +42,33 @@
 
 		<finder name="badgeType" return-type="Collection">
 			<finder-column name="badgeType" />
+		</finder>
+	</entity>
+	<entity name="Subscriber" local-service="false" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="subscriberId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="subscriberUserId" type="long" />
+		<column name="badgeType" type="long" />
+
+		<finder name="subscriberId" return-type="Collection">
+			<finder-column name="subscriberUserId" />
 		</finder>
 	</entity>
 </service-builder>
