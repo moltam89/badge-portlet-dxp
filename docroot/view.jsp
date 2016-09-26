@@ -31,7 +31,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.01</b> portlet.
+This is the <b>Badge v0.02</b> portlet.
 
 <%
 	List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
