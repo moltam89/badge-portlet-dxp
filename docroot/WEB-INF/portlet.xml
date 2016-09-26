@@ -18,6 +18,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>EDIT</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Badge</title>
 			<short-title>Badge</short-title>

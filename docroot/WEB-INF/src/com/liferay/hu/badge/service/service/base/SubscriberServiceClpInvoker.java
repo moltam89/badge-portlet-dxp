@@ -30,6 +30,18 @@ public class SubscriberServiceClpInvoker {
 		_methodName26 = "getOSGiServiceIdentifier";
 
 		_methodParameterTypes26 = new String[] {  };
+
+		_methodName31 = "subscribe";
+
+		_methodParameterTypes31 = new String[] {  };
+
+		_methodName32 = "isSubscribed";
+
+		_methodParameterTypes32 = new String[] {  };
+
+		_methodName33 = "getSubscribers";
+
+		_methodParameterTypes33 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -39,9 +51,32 @@ public class SubscriberServiceClpInvoker {
 			return SubscriberServiceUtil.getOSGiServiceIdentifier();
 		}
 
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+			SubscriberServiceUtil.subscribe();
+
+			return null;
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			return SubscriberServiceUtil.isSubscribed();
+		}
+
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+			return SubscriberServiceUtil.getSubscribers();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
 }

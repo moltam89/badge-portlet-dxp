@@ -33,6 +33,16 @@ public class SubscriberServiceWrapper implements SubscriberService,
 	}
 
 	@Override
+	public boolean isSubscribed() {
+		return _subscriberService.isSubscribed();
+	}
+
+	@Override
+	public java.lang.Long[] getSubscribers() {
+		return _subscriberService.getSubscribers();
+	}
+
+	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
@@ -47,6 +57,14 @@ public class SubscriberServiceWrapper implements SubscriberService,
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _subscriberService.getOSGiServiceIdentifier();
+	}
+
+	/**
+	* Subscribe/Unsubscribe for users
+	*/
+	@Override
+	public void subscribe() {
+		_subscriberService.subscribe();
 	}
 
 	@Override

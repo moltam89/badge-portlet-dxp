@@ -17,6 +17,8 @@ package com.liferay.hu.badge.service.service.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
+import com.liferay.hu.badge.utils.Account;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,23 +62,8 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 			return false;
 		}
 
-		long companyId = CompanyThreadLocal.getCompanyId();
-		long groupId = GroupThreadLocal.getGroupId();
+		Account account = new Account(userService);
 
-		long currentUserId = 0;
-		User currentUser;
-		try {
-			currentUser = userService.getCurrentUser();
-			if (currentUser != null) {
-				currentUserId = currentUser.getUserId();
-			}
-		} catch (PortalException e1) {
-			e1.printStackTrace();
-		} catch (SystemException e1) {
-			e1.printStackTrace();
-		}
-
-		
 		String fromUserName = _getUserFullNameById(fromUserId);
 		String toUserName = _getUserFullNameById(toUserId);
 
@@ -90,10 +77,10 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		badge.setToUserFullName(toUserName);
 		badge.setFromUserFullName(fromUserName);
 
-		badge.setCompanyId(companyId);
-		badge.setCreateDate(new Date());
-		badge.setGroupId(groupId);
-		badge.setUserId(currentUserId);
+		badge.setCompanyId(account.companyId);
+		badge.setCreateDate(account.createDate);
+		badge.setGroupId(account.groupId);
+		badge.setUserId(account.currentUserId);
 
 		try {
 			badgePersistence.update(badge);

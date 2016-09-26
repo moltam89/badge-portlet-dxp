@@ -1,4 +1,6 @@
 <%@page import="com.liferay.hu.badge.service.service.BadgeServiceUtil"%>
+<%@page import="com.liferay.hu.badge.service.service.SubscriberServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
@@ -47,15 +49,22 @@ This is the <b>Badge v0.01</b> portlet.
 	if (loggedInUser != null) {
 		loggedInUserId = loggedInUser.getUserId();
 	}
+
+	boolean isSubscribed = SubscriberServiceUtil.isSubscribed();
 %>
 
 <portlet:actionURL var="addBadgeURL" name="addBadgeAction"></portlet:actionURL>
+
+<aui:input type="checkbox" name="subscribe" label="subscribe-to-badges"
+	checked="<%= isSubscribed %>"
+	onChange="Liferay.Service('/badge-portlet.subscriber/subscribe',{});">
+</aui:input>
 
 <aui:form name="addBadgeForm" action="<%= addBadgeURL %>" method="POST">
 
 	<% if (isAdminMode || isSelfAdminMode) {%>
 
-	<liferay-ui:input-date name="assignDate" 
+	<liferay-ui:input-date name="assignDate"
 		dayValue="<%= today.get(Calendar.DAY_OF_MONTH) %>" dayParam="assignDay"
 		monthValue="<%= today.get(Calendar.MONTH) %>" monthParam="assignMonth"
 		yearValue="<%= today.get(Calendar.YEAR) %>" yearParam="assignYear"
@@ -63,7 +72,7 @@ This is the <b>Badge v0.01</b> portlet.
 	<% } %>
 
 	<% if (isAdminMode) {%>
-	<aui:select name="fromUser">
+	<aui:select name="fromUser" title="from-user" >
 		<aui:option value="-1">Select the From user</aui:option>
 		<% 
 			for (User user: users) {
@@ -78,8 +87,8 @@ This is the <b>Badge v0.01</b> portlet.
 
 	<% } %>
 
-	<aui:select name="toUser">
-		<aui:option value="-1">Select the To user</aui:option>
+	<aui:select name="toUser" title="to-user">
+		<aui:option value="-1"><%= LanguageUtil.get(request, "select-to-user") %></aui:option>
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
@@ -95,7 +104,7 @@ This is the <b>Badge v0.01</b> portlet.
 
 	<aui:input name="description"></aui:input>
 
-	<aui:input type="submit" name="addBadgeSubmit" value="Add Badge"></aui:input>
+	<aui:input type="submit" name="addBadgeSubmit" value="<%= LanguageUtil.get(request, "add-badge") %>" label="add-badge"></aui:input>
 </aui:form>
 
 <liferay-ui:search-container total="<%= badges.size() %>">
@@ -113,7 +122,7 @@ This is the <b>Badge v0.01</b> portlet.
 		modelVar="badge"
 	>
 
-	<liferay-ui:search-container-column-text
+	<liferay-ui:search-container-column-date
 		name="Date"
 		property="assignDate"
 	/>
@@ -122,22 +131,22 @@ This is the <b>Badge v0.01</b> portlet.
 		String imgName = (badge.getBadgeType() == 0) ? "thankyou" : "respect";
 	%>
 
-	<liferay-ui:search-container-column-text name="Bage Type">
+	<liferay-ui:search-container-column-text name="badge-type">
 		<img class="badgeimage" src="<%= request.getContextPath() %>/images/<%= imgName %>badge.png"/>
 	</liferay-ui:search-container-column-text>
 
 	<liferay-ui:search-container-column-text
-		name="To User"
+		name="to-user"
 		property="toUserFullName"
 	/>
 
 	<liferay-ui:search-container-column-text
-		name="From User"
+		name="from-user"
 		property="fromUserFullName"
 	/>
 
 	<liferay-ui:search-container-column-text
-		name="Description"
+		name="description"
 		property="description"
 	/>
 

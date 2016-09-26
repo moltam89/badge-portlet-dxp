@@ -19,7 +19,7 @@ public class Emails {
 	public static String NOTIFYUSR_SUBJECT = "You got a badge!";
 	public static String NOTIFYSUBSCRIBERS_SUBJECT = "A badge was assigned!";
 	public static String NOTIFYUSR_BODY = "Congratulation!\n\nYou got a %1$s badge from %2$s";
-	public static String NOTIFYSUBSCRIBERS_BODY = "%1$s gave a %2$s badge to %3$s";
+	public static String NOTIFYSUBSCRIBERS_BODY = "%2$s gave a %1$s badge to %3$s";
 
 	public static boolean notifyUser(long toUserId, long fromUserId, int badgeType, PortletRequest request) {
 		String emailAddr = _getEmailAddr(toUserId);
@@ -34,8 +34,37 @@ public class Emails {
 		String subject = NOTIFYUSR_SUBJECT;
 		String body = String.format(NOTIFYUSR_BODY, badgeName, fromUserName);
 
+		return sendMail(emailAddr, subject, body, request);
+	}
+
+	public static void notifySubscribers(
+		Long[] subscribers, long fromUserId, long toUserId, int badgeType,
+		PortletRequest request) {
+
+		for (long subscriberId: subscribers) {
+			String emailAddr = _getEmailAddr(subscriberId);
+			if (Validator.isNull(emailAddr)) {
+				_log.error("There is no email address for user " + subscriberId);
+				continue;
+			}
+
+			String fromUserName = _getUserName(fromUserId);
+			String toUserName = _getUserName(toUserId);
+			String badgeName = _getBadgeName(badgeType);
+
+			String subject = NOTIFYSUBSCRIBERS_SUBJECT;
+			String body = String.format(NOTIFYSUBSCRIBERS_BODY, badgeName, fromUserName, toUserName);
+
+			sendMail(emailAddr, subject, body, request);
+		}
+
+	}
+
+	public static boolean sendMail(String emailAddress, String subject, String body,
+			PortletRequest request) {
+
 		InternetAddress to = new InternetAddress();
-		to.setAddress(emailAddr);
+		to.setAddress(emailAddress);
 
 		MailMessage message = new MailMessage();
 
@@ -55,10 +84,6 @@ public class Emails {
 		}
 
 		return true;
-	}
-
-	public static void notifySubscribers(long[] subscribers, long fromUserId, long toUserId, int badgeType) {
-		
 	}
 
 	public static InternetAddress getCompanyAdminEmailAddr(PortletRequest request) {

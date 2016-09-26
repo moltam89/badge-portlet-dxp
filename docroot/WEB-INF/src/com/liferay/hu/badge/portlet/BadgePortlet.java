@@ -12,6 +12,7 @@ import javax.portlet.PortletPreferences;
 import org.apache.log4j.Logger;
 
 import com.liferay.hu.badge.service.service.BadgeServiceUtil;
+import com.liferay.hu.badge.service.service.SubscriberServiceUtil;
 import com.liferay.hu.badge.utils.Emails;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -79,6 +80,9 @@ public class BadgePortlet extends MVCPortlet {
 
 		BadgeServiceUtil.addBadge(date, fromUserId, toUserId, badgeType, description);
 		Emails.notifyUser(toUserId, fromUserId, badgeType, request);
+		Emails.notifySubscribers(
+			SubscriberServiceUtil.getSubscribers(), fromUserId, toUserId,
+			badgeType, request);
 	}
 
 	public void editPreferencesAction(ActionRequest request, ActionResponse actionResponse)

@@ -16,9 +16,16 @@ package com.liferay.hu.badge.service.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.hu.badge.service.service.SubscriberServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.hu.badge.service.service.SubscriberServiceUtil} service utility. The
+ * {@link SubscriberServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,50 @@ import aQute.bnd.annotation.ProviderType;
  * @author Borkuti Peter
  * @see SubscriberServiceHttp
  * @see com.liferay.hu.badge.service.model.SubscriberSoap
- * @see com.liferay.hu.badge.service.service.SubscriberServiceUtil
+ * @see SubscriberServiceUtil
  * @generated
  */
 @ProviderType
 public class SubscriberServiceSoap {
+	/**
+	* Subscribe/Unsubscribe for users
+	*/
+	public static void subscribe() throws RemoteException {
+		try {
+			SubscriberServiceUtil.subscribe();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean isSubscribed() throws RemoteException {
+		try {
+			boolean returnValue = SubscriberServiceUtil.isSubscribed();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.Long[] getSubscribers() throws RemoteException {
+		try {
+			java.lang.Long[] returnValue = SubscriberServiceUtil.getSubscribers();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(SubscriberServiceSoap.class);
 }

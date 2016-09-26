@@ -1,6 +1,7 @@
 <%@page import="com.liferay.hu.badge.service.service.BadgeServiceUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.liferay.hu.badge.service.model.Badge"%>
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
@@ -41,15 +42,15 @@ This is the <b>Badge v0.01</b> portlet.
 
 <aui:form name="editPreferencesForm" action="<%= editPreferencesURL %>" method="POST">
 	<%-- 
-	<aui:fieldset label="Badge types to show">
-		<aui:input type="checkbox" name="showthankyou" label="Thank You"></aui:input>
-		<aui:input type="checkbox" name="showrespect" label="Respect"></aui:input>
+	<aui:fieldset label="badge-types-to-show">
+		<aui:input type="checkbox" name="showthankyou" label="thank-you"></aui:input>
+		<aui:input type="checkbox" name="showrespect" label="respect"></aui:input>
 	</aui:fieldset>
 	--%>
 
-	<aui:fieldset label="Restrict Badge Type"  helpMessage="restrictbadge-help">
-		<aui:input type="radio" name="restrictbadgetype" value="addthankyou" label="Thank You" checked="<%= addthankyou %>"></aui:input>
-		<aui:input type="radio" name="restrictbadgetype" value="addrespect" label="Respect" checked="<%= addrespect %>"></aui:input>
+	<aui:fieldset label="restrict-badge-type" helpMessage="restrictbadge-help">
+		<aui:input type="radio" name="restrictbadgetype" value="addthankyou" label="thank-you" checked="<%= addthankyou %>"></aui:input>
+		<aui:input type="radio" name="restrictbadgetype" value="addrespect" label="respect" checked="<%= addrespect %>"></aui:input>
 	</aui:fieldset>
 
 	<%--
@@ -59,14 +60,14 @@ This is the <b>Badge v0.01</b> portlet.
 	</aui:fieldset>
 	 --%>
 
-	<aui:fieldset label="Admin Mode" helpMessage="admin-help">
-		<aui:input type="checkbox" name="adminmode" label="Admin Mode" checked="<%= adminmode %>"></aui:input>
+	<aui:fieldset label="admin-mode" helpMessage="admin-mode-help">
+		<aui:input type="checkbox" name="adminmode" label="admin-mode" checked="<%= adminmode %>"></aui:input>
 	</aui:fieldset>
 
-	<aui:fieldset label="Self Admin Mode" helpMessage="selfadmin-help">
-		<aui:input type="checkbox" name="selfadminmode" label="Self Admin Mode" checked="<%= selfadminmode %>"></aui:input>
+	<aui:fieldset label="self-admin-mode" helpMessage="selfadmin-mode-help">
+		<aui:input type="checkbox" name="selfadminmode" label="self-admin-mode" checked="<%= selfadminmode %>"></aui:input>
 	</aui:fieldset>
 
-	<aui:input type="submit" name="editSubmit" value="Save"></aui:input>
+	<aui:input type="submit" name="editSubmit" value="<%= LanguageUtil.get(request, "save") %>" label="save"></aui:input>
 </aui:form>
 

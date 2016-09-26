@@ -41,6 +41,14 @@ public class SubscriberServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.SubscriberServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean isSubscribed() {
+		return getService().isSubscribed();
+	}
+
+	public static java.lang.Long[] getSubscribers() {
+		return getService().getSubscribers();
+	}
+
 	public static java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
@@ -54,6 +62,13 @@ public class SubscriberServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	/**
+	* Subscribe/Unsubscribe for users
+	*/
+	public static void subscribe() {
+		getService().subscribe();
 	}
 
 	public static void clearService() {

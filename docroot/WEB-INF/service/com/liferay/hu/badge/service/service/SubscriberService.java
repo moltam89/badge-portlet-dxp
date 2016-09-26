@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.service.InvokableService;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
@@ -47,6 +48,12 @@ public interface SubscriberService extends BaseService, InvokableService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SubscriberServiceUtil} to access the subscriber remote service. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.SubscriberServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isSubscribed();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.Long[] getSubscribers();
+
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
@@ -58,4 +65,9 @@ public interface SubscriberService extends BaseService, InvokableService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	/**
+	* Subscribe/Unsubscribe for users
+	*/
+	public void subscribe();
 }
