@@ -1,6 +1,9 @@
 <%@page import="com.liferay.hu.badge.service.service.BadgeServiceUtil"%>
 <%@page import="com.liferay.hu.badge.service.service.SubscriberServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page import="com.liferay.portal.kernel.util.DateUtil"%>
+<%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
+<%@page import="com.liferay.hu.badge.utils.Emails"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
@@ -55,19 +58,26 @@ This is the <b>Badge v0.02</b> portlet.
 
 <portlet:actionURL var="addBadgeURL" name="addBadgeAction"></portlet:actionURL>
 
-<aui:input type="checkbox" name="subscribe" label="subscribe-to-badges"
-	checked="<%= isSubscribed %>"
-	onChange="Liferay.Service('/badge-portlet.subscriber/subscribe',{});">
-</aui:input>
+<aui:form name="temp" action="#">
+	<aui:input type="checkbox" name="subscribe" label="subscribe-to-badges"
+		checked="<%= isSubscribed %>"
+		onChange="Liferay.Service('/badge-portlet.subscriber/subscribe',function() {});"
+	>
+	</aui:input>
+</aui:form>
 
+ 
 <aui:form name="addBadgeForm" action="<%= addBadgeURL %>" method="POST">
 
 	<% if (isAdminMode || isSelfAdminMode) {%>
 
-	<liferay-ui:input-date name="assignDate"
+	<liferay-ui:input-date
+		name="assignDate"
+		disabled="<%= false %>"
 		dayValue="<%= today.get(Calendar.DAY_OF_MONTH) %>" dayParam="assignDay"
 		monthValue="<%= today.get(Calendar.MONTH) %>" monthParam="assignMonth"
 		yearValue="<%= today.get(Calendar.YEAR) %>" yearParam="assignYear"
+		firstDayOfWeek="<%= today.getFirstDayOfWeek() - 1 %>"
 	/>
 	<% } %>
 
@@ -77,7 +87,7 @@ This is the <b>Badge v0.02</b> portlet.
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
-				String userName = user.getFullName();
+				String userName = Emails.getUserName(user);
 				%>
 				<aui:option value="<%= userId %>"><%= userName %></aui:option>
 				<%
@@ -93,7 +103,7 @@ This is the <b>Badge v0.02</b> portlet.
 			for (User user: users) {
 				Long userId = user.getUserId();
 				if (loggedInUserId != userId) {
-					String userName = user.getFullName();
+					String userName = Emails.getUserName(user);
 					%>
 					<aui:option value="<%= userId %>"><%= userName %></aui:option>
 					<%
@@ -122,9 +132,10 @@ This is the <b>Badge v0.02</b> portlet.
 		modelVar="badge"
 	>
 
+<%-- When I used column-date, the date selector did not work in the input form --%>
 	<liferay-ui:search-container-column-date
-		name="Date"
 		property="assignDate"
+		name="Date"
 	/>
 
 	<%

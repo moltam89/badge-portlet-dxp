@@ -28,7 +28,7 @@ public class Emails {
 			return false;
 		}
 
-		String fromUserName = _getUserName(fromUserId);
+		String fromUserName = getUserName(fromUserId);
 		String badgeName = _getBadgeName(badgeType);
 
 		String subject = NOTIFYUSR_SUBJECT;
@@ -48,8 +48,8 @@ public class Emails {
 				continue;
 			}
 
-			String fromUserName = _getUserName(fromUserId);
-			String toUserName = _getUserName(toUserId);
+			String fromUserName = getUserName(fromUserId);
+			String toUserName = getUserName(toUserId);
 			String badgeName = _getBadgeName(badgeType);
 
 			String subject = NOTIFYSUBSCRIBERS_SUBJECT;
@@ -118,15 +118,38 @@ public class Emails {
 	}
 	
 
-	private static String _getUserName(long userId) {
-		String userName = "";
-		
-		try {
-			User user = UserLocalServiceUtil.getUser(userId);
+	public static String getUserName(long userId) {
+		User user = null;
 
-			userName = user.getFullName();
+		try {
+			user = UserLocalServiceUtil.getUser(userId);
+
 		} catch (PortalException e) {
 			_log.error(e.getMessage());
+		}
+
+		return getUserName(user);
+	}
+
+	public static String getUserName(User user) {
+		String userName = "";
+
+		if (user == null) {
+			return userName;
+		}
+
+		userName = user.getFullName();
+
+		if (Validator.isNull(userName)) {
+			userName = user.getScreenName();
+		}
+
+		if (Validator.isNull(userName)) {
+			userName = user.getEmailAddress();
+		}
+
+		if (Validator.isNull(userName)) {
+			userName = "" + user.getUserId();
 		}
 
 		return userName;
