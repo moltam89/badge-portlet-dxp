@@ -20,6 +20,7 @@ import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
 import com.liferay.hu.badge.utils.Account;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,10 @@ import com.liferay.hu.badge.service.model.Badge;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GroupThreadLocal;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
+
+
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 
@@ -107,22 +112,28 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 	public List<Badge> getBadges() {
 		List<Badge> badges = new ArrayList<Badge>();
 
+		OrderByComparator obc = (OrderByComparator) OrderByComparatorFactoryUtil.create("badgeportlet_badge", "assignDate", false); 
+
 		try {
-			badges = badgePersistence.findAll();
+			badges = badgePersistence.findAll(-1, -1, obc);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
+
 		return badges;
 	}
 
 	public List<Badge> getBadges(int badgeType) {
 		List<Badge> badges = new ArrayList<Badge>();
 
+		OrderByComparator obc = (OrderByComparator) OrderByComparatorFactoryUtil.create("badgeportlet_badge", "assignDate", false); 
+
 		try {
-			badges = badgePersistence.findBybadgeType(badgeType);
+			badges = badgePersistence.findBybadgeType(badgeType, -1, -1, obc);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
+
 		return badges;
 	}
 

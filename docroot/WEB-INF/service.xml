@@ -34,7 +34,7 @@
 
 		<!-- Order -->
 
-		<order by="asc">
+		<order by="desc">
 			<order-column name="assignDate" />
 		</order>
 
