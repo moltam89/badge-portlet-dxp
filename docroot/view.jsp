@@ -38,11 +38,7 @@ This is the <b>Badge v0.02</b> portlet.
 
 <%
 	List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
-	boolean isThankyoubadge = GetterUtil.getBoolean(portletPreferences.getValue("addthankyou", "false"), false);
-	int badgeType = BadgePortlet.BADGETYPE_THANKYOU;
-	if (!isThankyoubadge) {
-		badgeType = BadgePortlet.BADGETYPE_RESPECT;
-	}
+	int badgeType = BadgePortlet.getBadgeType(portletPreferences);
 	List<Badge> badges = BadgeServiceUtil.getBadges(badgeType);
 	Calendar today = Calendar.getInstance();
 	boolean isAdminMode = GetterUtil.getBoolean(portletPreferences.getValue("adminmode", "false"), false);

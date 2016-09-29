@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
 public class BadgePortlet extends MVCPortlet {
-
 	private boolean isAdminMode(ActionRequest request) {
 		PortletPreferences pp = request.getPreferences();
 
@@ -52,13 +52,8 @@ public class BadgePortlet extends MVCPortlet {
 		}
 
 		PortletPreferences pp = request.getPreferences();
-		boolean addrespect = GetterUtil.getBoolean(pp.getValue("addrespect", "false"), false);
 
-		int badgeType = BADGETYPE_THANKYOU;
-
-		if (addrespect) {
-			badgeType = BADGETYPE_RESPECT;
-		}
+		int badgeType = getBadgeType(pp);
 
 		long fromUserId = user.getUserId();
 
@@ -101,6 +96,27 @@ public class BadgePortlet extends MVCPortlet {
 		}
 
 		pp.store();
+	}
+
+	/**
+	 * Default is ThankYou badge, so when nobody set portlet preferences, portlet
+	 * will add and show thank you badges.
+	 * 
+	 * This method should be changed when there will be more badgetypes!
+	 * 
+	 * @param ppref
+	 * @return
+	 */
+	public static int getBadgeType(PortletPreferences ppref) {
+		int badgeType = BADGETYPE_THANKYOU;
+
+		boolean addthankyou = GetterUtil.getBoolean(ppref.getValue("addthankyou", "true"), true);
+
+		if (!addthankyou) {
+			badgeType = BADGETYPE_RESPECT;
+		}
+
+		return badgeType;
 	}
 
 	private Logger _log = Logger.getLogger(getClass());
