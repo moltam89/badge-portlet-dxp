@@ -78,8 +78,8 @@ This is the <b>Badge v0.02</b> portlet.
 	<% } %>
 
 	<% if (isAdminMode) {%>
-	<aui:select name="fromUser" title="from-user" >
-		<aui:option value="-1">Select the From user</aui:option>
+	<aui:select name="fromUser" title="from-user" required="true">
+		<aui:option value="">Select the From user</aui:option>
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
@@ -93,8 +93,8 @@ This is the <b>Badge v0.02</b> portlet.
 
 	<% } %>
 
-	<aui:select name="toUser" title="to-user">
-		<aui:option value="-1"><%= LanguageUtil.get(request, "select-to-user") %></aui:option>
+	<aui:select name="toUser" title="to-user" required="true">
+		<aui:option value=""><%= LanguageUtil.get(request, "select-to-user") %></aui:option>
 		<% 
 			for (User user: users) {
 				Long userId = user.getUserId();
