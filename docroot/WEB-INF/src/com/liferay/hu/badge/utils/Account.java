@@ -36,9 +36,9 @@ public class Account {
 				userId = currentUser.getUserId();
 			}
 		} catch (PortalException e1) {
-			_log.error(e1.getMessage());
+			_log.debug(e1.getMessage());
 		} catch (SystemException e1) {
-			_log.error(e1.getMessage());
+			_log.debug(e1.getMessage());
 		}
 
 		currentUserId = userId;

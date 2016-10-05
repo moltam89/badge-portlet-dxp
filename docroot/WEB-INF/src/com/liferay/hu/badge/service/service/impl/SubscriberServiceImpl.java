@@ -14,8 +14,6 @@
 
 package com.liferay.hu.badge.service.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,8 @@ import com.liferay.hu.badge.service.model.Subscriber;
 import com.liferay.hu.badge.service.service.base.SubscriberServiceBaseImpl;
 import com.liferay.hu.badge.utils.Account;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+
+import aQute.bnd.annotation.ProviderType;
 
 /**
  * The implementation of the subscriber remote service.
@@ -84,7 +84,7 @@ public class SubscriberServiceImpl extends SubscriberServiceBaseImpl {
 			}
 
 		} catch (PrincipalException e) {
-			_log.error(e.getMessage());
+			_log.debug(e.getMessage());
 		}
 	}
 
@@ -97,7 +97,7 @@ public class SubscriberServiceImpl extends SubscriberServiceBaseImpl {
 			return !subs.isEmpty();
 
 		} catch (PrincipalException e) {
-			_log.error(e.getMessage());
+			_log.debug(e.getMessage());
 		}
 
 		return false;

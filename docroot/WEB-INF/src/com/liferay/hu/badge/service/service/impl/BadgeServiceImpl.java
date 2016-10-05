@@ -14,26 +14,21 @@
 
 package com.liferay.hu.badge.service.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
-import com.liferay.hu.badge.utils.Account;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.liferay.hu.badge.service.model.Badge;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.hu.badge.service.service.base.BadgeServiceBaseImpl;
+import com.liferay.hu.badge.utils.Account;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.GroupThreadLocal;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 
-
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import aQute.bnd.annotation.ProviderType;
 
 /**
  * The implementation of the badge remote service.
@@ -63,7 +58,7 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		try {
 			badgeId = counterLocalService.increment();
 		} catch (SystemException e) {
-			e.printStackTrace();
+			_log.debug(e.getMessage());
 			return false;
 		}
 
@@ -90,7 +85,7 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		try {
 			badgePersistence.update(badge);
 		} catch (SystemException e) {
-			e.printStackTrace();
+			_log.debug(e.getMessage());
 			return false;
 		}
 
@@ -103,7 +98,7 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 			User user = userLocalService.fetchUser(userId);
 			userName = user.getFullName();
 		} catch (SystemException e) {
-			e.printStackTrace();
+			_log.debug(e.getMessage());
 		}
 
 		return userName;
@@ -117,7 +112,7 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		try {
 			badges = badgePersistence.findAll(-1, -1, obc);
 		} catch (SystemException e) {
-			e.printStackTrace();
+			_log.debug(e.getMessage());
 		}
 
 		return badges;
@@ -131,10 +126,12 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		try {
 			badges = badgePersistence.findBybadgeType(badgeType, -1, -1, obc);
 		} catch (SystemException e) {
-			e.printStackTrace();
+			_log.debug(e.getMessage());
 		}
 
 		return badges;
 	}
+
+	private static Logger _log = Logger.getLogger(BadgeServiceImpl.class); 
 
 }

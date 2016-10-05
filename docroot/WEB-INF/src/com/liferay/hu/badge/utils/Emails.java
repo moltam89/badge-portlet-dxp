@@ -24,7 +24,7 @@ public class Emails {
 	public static boolean notifyUser(long toUserId, long fromUserId, int badgeType, PortletRequest request) {
 		String emailAddr = _getEmailAddr(toUserId);
 		if (Validator.isNull(emailAddr)) {
-			_log.error("There is no email address for user " + toUserId);
+			_log.debug("There is no email address for user " + toUserId);
 			return false;
 		}
 
@@ -44,7 +44,7 @@ public class Emails {
 		for (long subscriberId: subscribers) {
 			String emailAddr = _getEmailAddr(subscriberId);
 			if (Validator.isNull(emailAddr)) {
-				_log.error("There is no email address for user " + subscriberId);
+				_log.debug("There is no email address for user " + subscriberId);
 				continue;
 			}
 
@@ -75,9 +75,9 @@ public class Emails {
 		message.setHTMLFormat(false);
 
 		try {
-			_log.error("message:" + message.toString());
+			_log.debug("message:" + message.toString());
 			MailEngine.send(message);
-			_log.error("message done");
+			_log.debug("message done");
 		} catch (MailEngineException e) {
 			e.printStackTrace();
 			return false;
@@ -111,7 +111,7 @@ public class Emails {
 
 			emailAddr = user.getEmailAddress();
 		} catch (PortalException e) {
-			_log.error(e.getMessage());
+			_log.debug(e.getMessage());
 		}
 
 		return emailAddr;
@@ -125,7 +125,7 @@ public class Emails {
 			user = UserLocalServiceUtil.getUser(userId);
 
 		} catch (PortalException e) {
-			_log.error(e.getMessage());
+			_log.debug(e.getMessage());
 		}
 
 		return getUserName(user);

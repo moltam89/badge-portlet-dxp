@@ -36,9 +36,9 @@ public class BadgePortlet extends MVCPortlet {
 		PortalUtil.getCompanyId(request);
 
 		long toUserId = GetterUtil.getLong(request.getParameter("toUser"), -1);
-		_log.error("toUserId:" + toUserId);
+		_log.debug("toUserId:" + toUserId);
 		if (toUserId == -1) {
-			_log.error("toUserId was not sent in request");
+			_log.debug("toUserId was not sent in request");
 			return;
 		}
 
@@ -47,7 +47,7 @@ public class BadgePortlet extends MVCPortlet {
 		User user = (User) request.getAttribute(WebKeys.USER);
 
 		if ((user == null ) || (user.getUserId() <= 0)) {
-			_log.error("logged in user is null or userId <= 0");
+			_log.debug("logged in user is null or userId <= 0");
 			return;
 		}
 
