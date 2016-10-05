@@ -55,6 +55,8 @@ public class BadgePortlet extends MVCPortlet {
 
 		int badgeType = getBadgeType(pp);
 
+		boolean isSelfAdminMode = GetterUtil.getBoolean(pp.getValue("selfadminmode", "false"));
+
 		long fromUserId = user.getUserId();
 
 		Date date = new Date();
@@ -64,6 +66,9 @@ public class BadgePortlet extends MVCPortlet {
 			if (tmpUserId >= 0) {
 				fromUserId = tmpUserId;
 			}
+		}
+
+		if (isSelfAdminMode || isAdminMode(request)) {
 			int year = GetterUtil.getInteger(request.getParameter("assignYear"), -1);
 			int month = GetterUtil.getInteger(request.getParameter("assignMonth"), -1);
 			int day = GetterUtil.getInteger(request.getParameter("assignDay"), -1);
