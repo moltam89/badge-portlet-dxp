@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="com.liferay.hu.badge.service.service.BadgeServiceUtil"%>
 <%@page import="com.liferay.hu.badge.service.service.SubscriberServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
@@ -5,13 +6,17 @@
 <%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
 <%@page import="com.liferay.hu.badge.utils.Emails"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.GroupLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.liferay.hu.badge.service.model.Badge"%>
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@page import="com.liferay.hu.badge.portlet.BadgePortlet"%>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.util.OrderByComparator"%>
+<%@page import="com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil"%>
 <%
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -37,7 +42,14 @@
 This is the <b>Badge v0.02</b> portlet.
 
 <%
-	List<User> users = UserLocalServiceUtil.getUsers(-1, -1);
+	OrderByComparator obc = (OrderByComparator)
+		OrderByComparatorFactoryUtil.create("User", "fullName", true);
+
+	List<User> usersTmp = UserLocalServiceUtil.getUsers(-1, -1);
+	List<User> users = new ArrayList<User>();
+	users.addAll(usersTmp);
+	Collections.sort(users, obc);
+
 	int badgeType = BadgePortlet.getBadgeType(portletPreferences);
 	List<Badge> badges = BadgeServiceUtil.getBadges(badgeType);
 	Calendar today = Calendar.getInstance();
