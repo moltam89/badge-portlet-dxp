@@ -8,6 +8,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.apache.log4j.Logger;
@@ -85,7 +86,7 @@ public class BadgePortlet extends MVCPortlet {
 			badgeType, request);
 	}
 
-	public void editPreferencesAction(ActionRequest request, ActionResponse actionResponse)
+	public void editPreferencesAction(ActionRequest request, ActionResponse response)
 			throws IOException, PortletException {
 
 		PortletPreferences pp = request.getPreferences();
@@ -101,6 +102,8 @@ public class BadgePortlet extends MVCPortlet {
 		}
 
 		pp.store();
+
+		response.setPortletMode(PortletMode.VIEW);
 	}
 
 	/**
