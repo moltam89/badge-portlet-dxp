@@ -39,7 +39,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.22</b> portlet.
+This is the <b>Badge v0.23</b> portlet.
 
 <%
 	OrderByComparator obc = (OrderByComparator)
@@ -59,6 +59,7 @@ This is the <b>Badge v0.22</b> portlet.
 	Collections.sort(users, obc);
 
 	int badgeType = BadgePortlet.getBadgeType(portletPreferences);
+	String badgeTypeString = BadgePortlet.getBadgeTypeString(badgeType);
 	List<Badge> badges = BadgeServiceUtil.getBadges(badgeType);
 	Calendar today = Calendar.getInstance();
 	boolean isAdminMode = GetterUtil.getBoolean(portletPreferences.getValue("adminmode", "false"), false);
@@ -132,7 +133,7 @@ This is the <b>Badge v0.22</b> portlet.
 		<aui:validator name="maxLength">128</aui:validator>
 	</aui:input>
 
-	<aui:input type="submit" name="addBadgeSubmit" value="<%= LanguageUtil.get(request, "add-badge") %>" label="add-badge"></aui:input>
+	<aui:input type="submit" name="addBadgeSubmit" value="<%= LanguageUtil.get(request, "add-badge-" + badgeTypeString) %>" label="add-badge"></aui:input>
 </aui:form>
 
 <liferay-ui:search-container total="<%= badges.size() %>">
@@ -157,7 +158,7 @@ This is the <b>Badge v0.22</b> portlet.
 	/>
 
 	<%
-		String imgName = (badge.getBadgeType() == 0) ? "thankyou" : "respect";
+		String imgName = BadgePortlet.getBadgeTypeString(badge.getBadgeType());
 	%>
 
 	<liferay-ui:search-container-column-text name="badge-type">

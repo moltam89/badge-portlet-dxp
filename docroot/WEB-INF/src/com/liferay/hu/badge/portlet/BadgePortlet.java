@@ -127,6 +127,38 @@ public class BadgePortlet extends MVCPortlet {
 		return badgeType;
 	}
 
+	/**
+	 * Default is ThankYou badge, so when nobody set portlet preferences, portlet
+	 * will add and show thank you badges.
+	 * 
+	 * This method should be changed when there will be more badgetypes!
+	 * 
+	 * @param ppref
+	 * @return
+	 */
+	public static String getBadgeTypeString(PortletPreferences ppref) {
+		int badgeType = getBadgeType(ppref);
+
+		return BADGETYPE_STRINGS[badgeType];
+	}
+
+	/**
+	 * Default is ThankYou badge, so when nobody set portlet preferences, portlet
+	 * will add and show thank you badges.
+	 * 
+	 * This method should be changed when there will be more badgetypes!
+	 * 
+	 * @param long badgeTypef
+	 * @return
+	 */
+	public static String getBadgeTypeString(long badgeType) {
+		if (badgeType < 0 || badgeType >= BADGETYPE_STRINGS.length) {
+			badgeType = 0;
+		}
+
+		return BADGETYPE_STRINGS[(int)badgeType];
+	}
+
 	private Logger _log = Logger.getLogger(getClass());
 
 	private static String[] editCheckboxParameters =
@@ -138,5 +170,6 @@ public class BadgePortlet extends MVCPortlet {
 
 	public static int BADGETYPE_THANKYOU = 0;
 	public static int BADGETYPE_RESPECT = 1;
+	public static String[] BADGETYPE_STRINGS = {"thankyou", "respect"};
 
 }
