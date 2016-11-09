@@ -26,6 +26,9 @@
 
 		<column name="badgeType" type="long" />
 		<column name="assignDate" type="Date" />
+		<column name="assignYear" type="Integer" />
+		<column name="assignMonth" type="Integer" />
+		<column name="assignDay" type="Integer" />
 		<column name="toUser" type="long" />
 		<column name="toUserFullName" type="String" />
 		<column name="fromUser" type="long" />
@@ -43,6 +46,16 @@
 		<finder name="badgeType" return-type="Collection">
 			<finder-column name="badgeType" />
 		</finder>
+
+		<finder name="badgeTypeYearMontDayFromTo" return-type="Collection">
+			<finder-column name="badgeType" />
+			<finder-column name="assignYear" />
+			<finder-column name="assignMonth" />
+			<finder-column name="assignDay" />
+			<finder-column name="fromUser" />
+			<finder-column name="toUser" />
+		</finder>
+
 	</entity>
 	<entity name="Subscriber" local-service="false" remote-service="true">
 

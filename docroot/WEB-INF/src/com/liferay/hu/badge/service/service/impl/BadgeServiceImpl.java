@@ -15,7 +15,7 @@
 package com.liferay.hu.badge.service.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -51,29 +51,27 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.hu.badge.service.service.BadgeServiceUtil} to access the badge remote service.
 	 */
-	 	public boolean addBadge(Date date, long fromUserId, long toUserId,
+	 	public boolean addBadge(Calendar date, long fromUserId, long toUserId,
 			int badgeType, String description) {
+	 	int year = date.get(Calendar.YEAR);
+		int month = date.get(Calendar.MONTH);
+		int day = date.get(Calendar.DAY_OF_MONTH);
 
-		long badgeId = 0;
-		try {
-			badgeId = counterLocalService.increment();
-		} catch (SystemException e) {
-			_log.debug(e.getMessage());
-			return false;
-		}
+		Badge badge = _getBadge(badgeType, year, month, day, fromUserId, toUserId);
 
 		Account account = new Account(userService);
 
 		String fromUserName = _getUserFullNameById(fromUserId);
 		String toUserName = _getUserFullNameById(toUserId);
 
-		Badge badge = badgePersistence.create(badgeId);
-
 		badge.setBadgeType(badgeType);
 		badge.setDescription(description);
 		badge.setToUser(toUserId);
 		badge.setFromUser(fromUserId);
-		badge.setAssignDate(date);
+		badge.setAssignDate(date.getTime());
+		badge.setAssignYear(date.get(Calendar.YEAR));
+		badge.setAssignMonth(date.get(Calendar.MONTH));
+		badge.setAssignDay(date.get(Calendar.DAY_OF_MONTH));
 		badge.setToUserFullName(toUserName);
 		badge.setFromUserFullName(fromUserName);
 
@@ -130,6 +128,25 @@ public class BadgeServiceImpl extends BadgeServiceBaseImpl {
 		}
 
 		return badges;
+	}
+
+	private Badge _getBadge(long badgeType, int year, int month, int day,
+			long fromUserId, long toUserId) {
+		Badge badge = null;
+
+		List<Badge> badges =
+				badgePersistence.findBybadgeTypeYearMontDayFromTo(badgeType,
+					year, month, day, fromUserId, toUserId);
+
+		if (badges.isEmpty()) {
+			long badgeId = counterLocalService.increment();
+			badge = badgePersistence.create(badgeId);
+		}
+		else {
+			badge = badges.get(0);
+		}
+
+		return badge;
 	}
 
 	private static Logger _log = Logger.getLogger(BadgeServiceImpl.class); 
