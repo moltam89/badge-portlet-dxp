@@ -33,7 +33,7 @@ public class BadgeServiceWrapper implements BadgeService,
 	}
 
 	@Override
-	public boolean addBadge(java.util.Date date, long fromUserId,
+	public boolean addBadge(java.util.Calendar date, long fromUserId,
 		long toUserId, int badgeType, java.lang.String description) {
 		return _badgeService.addBadge(date, fromUserId, toUserId, badgeType,
 			description);

@@ -66,6 +66,9 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
+		attributes.put("assignYear", getAssignYear());
+		attributes.put("assignMonth", getAssignMonth());
+		attributes.put("assignDay", getAssignDay());
 		attributes.put("toUser", getToUser());
 		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
@@ -129,6 +132,24 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 
 		if (assignDate != null) {
 			setAssignDate(assignDate);
+		}
+
+		Integer assignYear = (Integer)attributes.get("assignYear");
+
+		if (assignYear != null) {
+			setAssignYear(assignYear);
+		}
+
+		Integer assignMonth = (Integer)attributes.get("assignMonth");
+
+		if (assignMonth != null) {
+			setAssignMonth(assignMonth);
+		}
+
+		Integer assignDay = (Integer)attributes.get("assignDay");
+
+		if (assignDay != null) {
+			setAssignDay(assignDay);
 		}
 
 		Long toUser = (Long)attributes.get("toUser");
@@ -210,6 +231,36 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _badge.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the assign day of this badge.
+	*
+	* @return the assign day of this badge
+	*/
+	@Override
+	public java.lang.Integer getAssignDay() {
+		return _badge.getAssignDay();
+	}
+
+	/**
+	* Returns the assign month of this badge.
+	*
+	* @return the assign month of this badge
+	*/
+	@Override
+	public java.lang.Integer getAssignMonth() {
+		return _badge.getAssignMonth();
+	}
+
+	/**
+	* Returns the assign year of this badge.
+	*
+	* @return the assign year of this badge
+	*/
+	@Override
+	public java.lang.Integer getAssignYear() {
+		return _badge.getAssignYear();
 	}
 
 	@Override
@@ -395,6 +446,36 @@ public class BadgeWrapper implements Badge, ModelWrapper<Badge> {
 	@Override
 	public void setAssignDate(Date assignDate) {
 		_badge.setAssignDate(assignDate);
+	}
+
+	/**
+	* Sets the assign day of this badge.
+	*
+	* @param assignDay the assign day of this badge
+	*/
+	@Override
+	public void setAssignDay(java.lang.Integer assignDay) {
+		_badge.setAssignDay(assignDay);
+	}
+
+	/**
+	* Sets the assign month of this badge.
+	*
+	* @param assignMonth the assign month of this badge
+	*/
+	@Override
+	public void setAssignMonth(java.lang.Integer assignMonth) {
+		_badge.setAssignMonth(assignMonth);
+	}
+
+	/**
+	* Sets the assign year of this badge.
+	*
+	* @param assignYear the assign year of this badge
+	*/
+	@Override
+	public void setAssignYear(java.lang.Integer assignYear) {
+		_badge.setAssignYear(assignYear);
 	}
 
 	/**

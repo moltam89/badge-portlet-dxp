@@ -41,7 +41,7 @@ public class BadgeServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.BadgeServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static boolean addBadge(java.util.Date date, long fromUserId,
+	public static boolean addBadge(java.util.Calendar date, long fromUserId,
 		long toUserId, int badgeType, java.lang.String description) {
 		return getService()
 				   .addBadge(date, fromUserId, toUserId, badgeType, description);

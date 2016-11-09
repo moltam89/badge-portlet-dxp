@@ -34,7 +34,7 @@ public class BadgeServiceClpInvoker {
 		_methodName31 = "addBadge";
 
 		_methodParameterTypes31 = new String[] {
-				"java.util.Date", "long", "long", "int", "java.lang.String"
+				"java.util.Calendar", "long", "long", "int", "java.lang.String"
 			};
 
 		_methodName33 = "getBadges";
@@ -55,7 +55,7 @@ public class BadgeServiceClpInvoker {
 
 		if (_methodName31.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
-			return BadgeServiceUtil.addBadge((java.util.Date)arguments[0],
+			return BadgeServiceUtil.addBadge((java.util.Calendar)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				((Integer)arguments[3]).intValue(),

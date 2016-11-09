@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -53,7 +53,7 @@ public interface BadgeService extends BaseService, InvokableService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BadgeServiceUtil} to access the badge remote service. Add custom service methods to {@link com.liferay.hu.badge.service.service.impl.BadgeServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public boolean addBadge(Date date, long fromUserId, long toUserId,
+	public boolean addBadge(Calendar date, long fromUserId, long toUserId,
 		int badgeType, java.lang.String description);
 
 	@Override

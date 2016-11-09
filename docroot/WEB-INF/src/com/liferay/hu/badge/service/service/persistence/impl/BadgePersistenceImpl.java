@@ -53,6 +53,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -588,6 +589,731 @@ public class BadgePersistenceImpl extends BasePersistenceImpl<Badge>
 	}
 
 	private static final String _FINDER_COLUMN_BADGETYPE_BADGETYPE_2 = "badge.badgeType = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO =
+		new FinderPath(BadgeModelImpl.ENTITY_CACHE_ENABLED,
+			BadgeModelImpl.FINDER_CACHE_ENABLED, BadgeImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findBybadgeTypeYearMontDayFromTo",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO =
+		new FinderPath(BadgeModelImpl.ENTITY_CACHE_ENABLED,
+			BadgeModelImpl.FINDER_CACHE_ENABLED, BadgeImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findBybadgeTypeYearMontDayFromTo",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Long.class.getName()
+			},
+			BadgeModelImpl.BADGETYPE_COLUMN_BITMASK |
+			BadgeModelImpl.ASSIGNYEAR_COLUMN_BITMASK |
+			BadgeModelImpl.ASSIGNMONTH_COLUMN_BITMASK |
+			BadgeModelImpl.ASSIGNDAY_COLUMN_BITMASK |
+			BadgeModelImpl.FROMUSER_COLUMN_BITMASK |
+			BadgeModelImpl.TOUSER_COLUMN_BITMASK |
+			BadgeModelImpl.ASSIGNDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BADGETYPEYEARMONTDAYFROMTO =
+		new FinderPath(BadgeModelImpl.ENTITY_CACHE_ENABLED,
+			BadgeModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBybadgeTypeYearMontDayFromTo",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Long.class.getName()
+			});
+
+	/**
+	 * Returns all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @return the matching badges
+	 */
+	@Override
+	public List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser) {
+		return findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param start the lower bound of the range of badges
+	 * @param end the upper bound of the range of badges (not inclusive)
+	 * @return the range of matching badges
+	 */
+	@Override
+	public List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, int start, int end) {
+		return findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param start the lower bound of the range of badges
+	 * @param end the upper bound of the range of badges (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching badges
+	 */
+	@Override
+	public List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, int start, int end,
+		OrderByComparator<Badge> orderByComparator) {
+		return findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param start the lower bound of the range of badges
+	 * @param end the upper bound of the range of badges (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching badges
+	 */
+	@Override
+	public List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, int start, int end,
+		OrderByComparator<Badge> orderByComparator, boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO;
+			finderArgs = new Object[] {
+					badgeType, assignYear, assignMonth, assignDay, fromUser,
+					toUser
+				};
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO;
+			finderArgs = new Object[] {
+					badgeType, assignYear, assignMonth, assignDay, fromUser,
+					toUser,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Badge> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Badge>)finderCache.getResult(finderPath, finderArgs,
+					this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Badge badge : list) {
+					if ((badgeType != badge.getBadgeType()) ||
+							!Objects.equals(assignYear, badge.getAssignYear()) ||
+							!Objects.equals(assignMonth, badge.getAssignMonth()) ||
+							!Objects.equals(assignDay, badge.getAssignDay()) ||
+							(fromUser != badge.getFromUser()) ||
+							(toUser != badge.getToUser())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(8 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(8);
+			}
+
+			query.append(_SQL_SELECT_BADGE_WHERE);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_BADGETYPE_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNYEAR_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNMONTH_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNDAY_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_FROMUSER_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_TOUSER_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(BadgeModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(badgeType);
+
+				qPos.add(assignYear.intValue());
+
+				qPos.add(assignMonth.intValue());
+
+				qPos.add(assignDay.intValue());
+
+				qPos.add(fromUser);
+
+				qPos.add(toUser);
+
+				if (!pagination) {
+					list = (List<Badge>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Badge>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching badge
+	 * @throws NoSuchBadgeException if a matching badge could not be found
+	 */
+	@Override
+	public Badge findBybadgeTypeYearMontDayFromTo_First(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator)
+		throws NoSuchBadgeException {
+		Badge badge = fetchBybadgeTypeYearMontDayFromTo_First(badgeType,
+				assignYear, assignMonth, assignDay, fromUser, toUser,
+				orderByComparator);
+
+		if (badge != null) {
+			return badge;
+		}
+
+		StringBundler msg = new StringBundler(14);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("badgeType=");
+		msg.append(badgeType);
+
+		msg.append(", assignYear=");
+		msg.append(assignYear);
+
+		msg.append(", assignMonth=");
+		msg.append(assignMonth);
+
+		msg.append(", assignDay=");
+		msg.append(assignDay);
+
+		msg.append(", fromUser=");
+		msg.append(fromUser);
+
+		msg.append(", toUser=");
+		msg.append(toUser);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchBadgeException(msg.toString());
+	}
+
+	/**
+	 * Returns the first badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching badge, or <code>null</code> if a matching badge could not be found
+	 */
+	@Override
+	public Badge fetchBybadgeTypeYearMontDayFromTo_First(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator) {
+		List<Badge> list = findBybadgeTypeYearMontDayFromTo(badgeType,
+				assignYear, assignMonth, assignDay, fromUser, toUser, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching badge
+	 * @throws NoSuchBadgeException if a matching badge could not be found
+	 */
+	@Override
+	public Badge findBybadgeTypeYearMontDayFromTo_Last(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator)
+		throws NoSuchBadgeException {
+		Badge badge = fetchBybadgeTypeYearMontDayFromTo_Last(badgeType,
+				assignYear, assignMonth, assignDay, fromUser, toUser,
+				orderByComparator);
+
+		if (badge != null) {
+			return badge;
+		}
+
+		StringBundler msg = new StringBundler(14);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("badgeType=");
+		msg.append(badgeType);
+
+		msg.append(", assignYear=");
+		msg.append(assignYear);
+
+		msg.append(", assignMonth=");
+		msg.append(assignMonth);
+
+		msg.append(", assignDay=");
+		msg.append(assignDay);
+
+		msg.append(", fromUser=");
+		msg.append(fromUser);
+
+		msg.append(", toUser=");
+		msg.append(toUser);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchBadgeException(msg.toString());
+	}
+
+	/**
+	 * Returns the last badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching badge, or <code>null</code> if a matching badge could not be found
+	 */
+	@Override
+	public Badge fetchBybadgeTypeYearMontDayFromTo_Last(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator) {
+		int count = countBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+				assignMonth, assignDay, fromUser, toUser);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Badge> list = findBybadgeTypeYearMontDayFromTo(badgeType,
+				assignYear, assignMonth, assignDay, fromUser, toUser,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the badges before and after the current badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeId the primary key of the current badge
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next badge
+	 * @throws NoSuchBadgeException if a badge with the primary key could not be found
+	 */
+	@Override
+	public Badge[] findBybadgeTypeYearMontDayFromTo_PrevAndNext(long badgeId,
+		long badgeType, Integer assignYear, Integer assignMonth,
+		Integer assignDay, long fromUser, long toUser,
+		OrderByComparator<Badge> orderByComparator) throws NoSuchBadgeException {
+		Badge badge = findByPrimaryKey(badgeId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Badge[] array = new BadgeImpl[3];
+
+			array[0] = getBybadgeTypeYearMontDayFromTo_PrevAndNext(session,
+					badge, badgeType, assignYear, assignMonth, assignDay,
+					fromUser, toUser, orderByComparator, true);
+
+			array[1] = badge;
+
+			array[2] = getBybadgeTypeYearMontDayFromTo_PrevAndNext(session,
+					badge, badgeType, assignYear, assignMonth, assignDay,
+					fromUser, toUser, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Badge getBybadgeTypeYearMontDayFromTo_PrevAndNext(
+		Session session, Badge badge, long badgeType, Integer assignYear,
+		Integer assignMonth, Integer assignDay, long fromUser, long toUser,
+		OrderByComparator<Badge> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(9 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(8);
+		}
+
+		query.append(_SQL_SELECT_BADGE_WHERE);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_BADGETYPE_2);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNYEAR_2);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNMONTH_2);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNDAY_2);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_FROMUSER_2);
+
+		query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_TOUSER_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(BadgeModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(badgeType);
+
+		qPos.add(assignYear.intValue());
+
+		qPos.add(assignMonth.intValue());
+
+		qPos.add(assignDay.intValue());
+
+		qPos.add(fromUser);
+
+		qPos.add(toUser);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(badge);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Badge> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63; from the database.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 */
+	@Override
+	public void removeBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser) {
+		for (Badge badge : findBybadgeTypeYearMontDayFromTo(badgeType,
+				assignYear, assignMonth, assignDay, fromUser, toUser,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(badge);
+		}
+	}
+
+	/**
+	 * Returns the number of badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	 *
+	 * @param badgeType the badge type
+	 * @param assignYear the assign year
+	 * @param assignMonth the assign month
+	 * @param assignDay the assign day
+	 * @param fromUser the from user
+	 * @param toUser the to user
+	 * @return the number of matching badges
+	 */
+	@Override
+	public int countBybadgeTypeYearMontDayFromTo(long badgeType,
+		Integer assignYear, Integer assignMonth, Integer assignDay,
+		long fromUser, long toUser) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BADGETYPEYEARMONTDAYFROMTO;
+
+		Object[] finderArgs = new Object[] {
+				badgeType, assignYear, assignMonth, assignDay, fromUser, toUser
+			};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(7);
+
+			query.append(_SQL_COUNT_BADGE_WHERE);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_BADGETYPE_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNYEAR_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNMONTH_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNDAY_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_FROMUSER_2);
+
+			query.append(_FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_TOUSER_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(badgeType);
+
+				qPos.add(assignYear.intValue());
+
+				qPos.add(assignMonth.intValue());
+
+				qPos.add(assignDay.intValue());
+
+				qPos.add(fromUser);
+
+				qPos.add(toUser);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_BADGETYPE_2 =
+		"badge.badgeType = ? AND ";
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNYEAR_2 =
+		"badge.assignYear = ? AND ";
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNMONTH_2 =
+		"badge.assignMonth = ? AND ";
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_ASSIGNDAY_2 =
+		"badge.assignDay = ? AND ";
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_FROMUSER_2 =
+		"badge.fromUser = ? AND ";
+	private static final String _FINDER_COLUMN_BADGETYPEYEARMONTDAYFROMTO_TOUSER_2 =
+		"badge.toUser = ?";
 
 	public BadgePersistenceImpl() {
 		setModelClass(Badge.class);
@@ -841,6 +1567,36 @@ public class BadgePersistenceImpl extends BasePersistenceImpl<Badge>
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPE,
 					args);
 			}
+
+			if ((badgeModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						badgeModelImpl.getOriginalBadgeType(),
+						badgeModelImpl.getOriginalAssignYear(),
+						badgeModelImpl.getOriginalAssignMonth(),
+						badgeModelImpl.getOriginalAssignDay(),
+						badgeModelImpl.getOriginalFromUser(),
+						badgeModelImpl.getOriginalToUser()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_BADGETYPEYEARMONTDAYFROMTO,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO,
+					args);
+
+				args = new Object[] {
+						badgeModelImpl.getBadgeType(),
+						badgeModelImpl.getAssignYear(),
+						badgeModelImpl.getAssignMonth(),
+						badgeModelImpl.getAssignDay(),
+						badgeModelImpl.getFromUser(), badgeModelImpl.getToUser()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_BADGETYPEYEARMONTDAYFROMTO,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BADGETYPEYEARMONTDAYFROMTO,
+					args);
+			}
 		}
 
 		entityCache.putResult(BadgeModelImpl.ENTITY_CACHE_ENABLED,
@@ -870,6 +1626,9 @@ public class BadgePersistenceImpl extends BasePersistenceImpl<Badge>
 		badgeImpl.setModifiedDate(badge.getModifiedDate());
 		badgeImpl.setBadgeType(badge.getBadgeType());
 		badgeImpl.setAssignDate(badge.getAssignDate());
+		badgeImpl.setAssignYear(badge.getAssignYear());
+		badgeImpl.setAssignMonth(badge.getAssignMonth());
+		badgeImpl.setAssignDay(badge.getAssignDay());
 		badgeImpl.setToUser(badge.getToUser());
 		badgeImpl.setToUserFullName(badge.getToUserFullName());
 		badgeImpl.setFromUser(badge.getFromUser());

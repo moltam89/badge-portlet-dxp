@@ -16,6 +16,9 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="badgeType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="assignDate" type="org.hibernate.type.TimestampType" />
+		<property name="assignYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="assignMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="assignDay" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="toUser" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="toUserFullName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fromUser" type="com.liferay.portal.dao.orm.hibernate.LongType" />

@@ -65,7 +65,7 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{badgeId=");
 		sb.append(badgeId);
@@ -85,6 +85,12 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		sb.append(badgeType);
 		sb.append(", assignDate=");
 		sb.append(assignDate);
+		sb.append(", assignYear=");
+		sb.append(assignYear);
+		sb.append(", assignMonth=");
+		sb.append(assignMonth);
+		sb.append(", assignDay=");
+		sb.append(assignDay);
 		sb.append(", toUser=");
 		sb.append(toUser);
 		sb.append(", toUserFullName=");
@@ -139,6 +145,9 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 			badgeImpl.setAssignDate(new Date(assignDate));
 		}
 
+		badgeImpl.setAssignYear(assignYear);
+		badgeImpl.setAssignMonth(assignMonth);
+		badgeImpl.setAssignDay(assignDay);
 		badgeImpl.setToUser(toUser);
 
 		if (toUserFullName == null) {
@@ -185,6 +194,12 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 		badgeType = objectInput.readLong();
 		assignDate = objectInput.readLong();
 
+		assignYear = objectInput.readInt();
+
+		assignMonth = objectInput.readInt();
+
+		assignDay = objectInput.readInt();
+
 		toUser = objectInput.readLong();
 		toUserFullName = objectInput.readUTF();
 
@@ -216,6 +231,12 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 
 		objectOutput.writeLong(badgeType);
 		objectOutput.writeLong(assignDate);
+
+		objectOutput.writeInt(assignYear);
+
+		objectOutput.writeInt(assignMonth);
+
+		objectOutput.writeInt(assignDay);
 
 		objectOutput.writeLong(toUser);
 
@@ -252,6 +273,9 @@ public class BadgeCacheModel implements CacheModel<Badge>, Externalizable {
 	public long modifiedDate;
 	public long badgeType;
 	public long assignDate;
+	public int assignYear;
+	public int assignMonth;
+	public int assignDay;
 	public long toUser;
 	public String toUserFullName;
 	public long fromUser;

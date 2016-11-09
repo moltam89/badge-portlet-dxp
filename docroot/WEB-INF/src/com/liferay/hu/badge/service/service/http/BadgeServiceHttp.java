@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 @ProviderType
 public class BadgeServiceHttp {
 	public static boolean addBadge(HttpPrincipal httpPrincipal,
-		java.util.Date date, long fromUserId, long toUserId, int badgeType,
+		java.util.Calendar date, long fromUserId, long toUserId, int badgeType,
 		java.lang.String description) {
 		try {
 			MethodKey methodKey = new MethodKey(BadgeServiceUtil.class,
@@ -137,7 +137,7 @@ public class BadgeServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(BadgeServiceHttp.class);
 	private static final Class<?>[] _addBadgeParameterTypes0 = new Class[] {
-			java.util.Date.class, long.class, long.class, int.class,
+			java.util.Calendar.class, long.class, long.class, int.class,
 			java.lang.String.class
 		};
 	private static final Class<?>[] _getBadgesParameterTypes2 = new Class[] {  };

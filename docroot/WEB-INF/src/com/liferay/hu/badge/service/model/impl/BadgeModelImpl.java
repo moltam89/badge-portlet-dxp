@@ -79,6 +79,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "badgeType", Types.BIGINT },
 			{ "assignDate", Types.TIMESTAMP },
+			{ "assignYear", Types.INTEGER },
+			{ "assignMonth", Types.INTEGER },
+			{ "assignDay", Types.INTEGER },
 			{ "toUser", Types.BIGINT },
 			{ "toUserFullName", Types.VARCHAR },
 			{ "fromUser", Types.BIGINT },
@@ -97,6 +100,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("badgeType", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("assignDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("assignYear", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("assignMonth", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("assignDay", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("toUser", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("toUserFullName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("fromUser", Types.BIGINT);
@@ -104,10 +110,10 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table BadgePortlet_Badge (badgeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,badgeType LONG,assignDate DATE null,toUser LONG,toUserFullName VARCHAR(75) null,fromUser LONG,fromUserFullName VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table BadgePortlet_Badge (badgeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,badgeType LONG,assignDate DATE null,assignYear INTEGER,assignMonth INTEGER,assignDay INTEGER,toUser LONG,toUserFullName VARCHAR(75) null,fromUser LONG,fromUserFullName VARCHAR(75) null,description VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table BadgePortlet_Badge";
-	public static final String ORDER_BY_JPQL = " ORDER BY badge.assignDate ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY BadgePortlet_Badge.assignDate ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY badge.assignDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY BadgePortlet_Badge.assignDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -120,8 +126,13 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.liferay.hu.badge.service.model.Badge"),
 			true);
-	public static final long BADGETYPE_COLUMN_BITMASK = 1L;
-	public static final long ASSIGNDATE_COLUMN_BITMASK = 2L;
+	public static final long ASSIGNDAY_COLUMN_BITMASK = 1L;
+	public static final long ASSIGNMONTH_COLUMN_BITMASK = 2L;
+	public static final long ASSIGNYEAR_COLUMN_BITMASK = 4L;
+	public static final long BADGETYPE_COLUMN_BITMASK = 8L;
+	public static final long FROMUSER_COLUMN_BITMASK = 16L;
+	public static final long TOUSER_COLUMN_BITMASK = 32L;
+	public static final long ASSIGNDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -145,6 +156,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setBadgeType(soapModel.getBadgeType());
 		model.setAssignDate(soapModel.getAssignDate());
+		model.setAssignYear(soapModel.getAssignYear());
+		model.setAssignMonth(soapModel.getAssignMonth());
+		model.setAssignDay(soapModel.getAssignDay());
 		model.setToUser(soapModel.getToUser());
 		model.setToUserFullName(soapModel.getToUserFullName());
 		model.setFromUser(soapModel.getFromUser());
@@ -223,6 +237,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
+		attributes.put("assignYear", getAssignYear());
+		attributes.put("assignMonth", getAssignMonth());
+		attributes.put("assignDay", getAssignDay());
 		attributes.put("toUser", getToUser());
 		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
@@ -289,6 +306,24 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 		if (assignDate != null) {
 			setAssignDate(assignDate);
+		}
+
+		Integer assignYear = (Integer)attributes.get("assignYear");
+
+		if (assignYear != null) {
+			setAssignYear(assignYear);
+		}
+
+		Integer assignMonth = (Integer)attributes.get("assignMonth");
+
+		if (assignMonth != null) {
+			setAssignMonth(assignMonth);
+		}
+
+		Integer assignDay = (Integer)attributes.get("assignDay");
+
+		if (assignDay != null) {
+			setAssignDay(assignDay);
 		}
 
 		Long toUser = (Long)attributes.get("toUser");
@@ -464,13 +499,94 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@JSON
 	@Override
+	public Integer getAssignYear() {
+		return _assignYear;
+	}
+
+	@Override
+	public void setAssignYear(Integer assignYear) {
+		_columnBitmask |= ASSIGNYEAR_COLUMN_BITMASK;
+
+		if (!_setOriginalAssignYear) {
+			_setOriginalAssignYear = true;
+
+			_originalAssignYear = _assignYear;
+		}
+
+		_assignYear = assignYear;
+	}
+
+	public Integer getOriginalAssignYear() {
+		return _originalAssignYear;
+	}
+
+	@JSON
+	@Override
+	public Integer getAssignMonth() {
+		return _assignMonth;
+	}
+
+	@Override
+	public void setAssignMonth(Integer assignMonth) {
+		_columnBitmask |= ASSIGNMONTH_COLUMN_BITMASK;
+
+		if (!_setOriginalAssignMonth) {
+			_setOriginalAssignMonth = true;
+
+			_originalAssignMonth = _assignMonth;
+		}
+
+		_assignMonth = assignMonth;
+	}
+
+	public Integer getOriginalAssignMonth() {
+		return _originalAssignMonth;
+	}
+
+	@JSON
+	@Override
+	public Integer getAssignDay() {
+		return _assignDay;
+	}
+
+	@Override
+	public void setAssignDay(Integer assignDay) {
+		_columnBitmask |= ASSIGNDAY_COLUMN_BITMASK;
+
+		if (!_setOriginalAssignDay) {
+			_setOriginalAssignDay = true;
+
+			_originalAssignDay = _assignDay;
+		}
+
+		_assignDay = assignDay;
+	}
+
+	public Integer getOriginalAssignDay() {
+		return _originalAssignDay;
+	}
+
+	@JSON
+	@Override
 	public long getToUser() {
 		return _toUser;
 	}
 
 	@Override
 	public void setToUser(long toUser) {
+		_columnBitmask |= TOUSER_COLUMN_BITMASK;
+
+		if (!_setOriginalToUser) {
+			_setOriginalToUser = true;
+
+			_originalToUser = _toUser;
+		}
+
 		_toUser = toUser;
+	}
+
+	public long getOriginalToUser() {
+		return _originalToUser;
 	}
 
 	@JSON
@@ -497,7 +613,19 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@Override
 	public void setFromUser(long fromUser) {
+		_columnBitmask |= FROMUSER_COLUMN_BITMASK;
+
+		if (!_setOriginalFromUser) {
+			_setOriginalFromUser = true;
+
+			_originalFromUser = _fromUser;
+		}
+
 		_fromUser = fromUser;
+	}
+
+	public long getOriginalFromUser() {
+		return _originalFromUser;
 	}
 
 	@JSON
@@ -572,6 +700,9 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		badgeImpl.setModifiedDate(getModifiedDate());
 		badgeImpl.setBadgeType(getBadgeType());
 		badgeImpl.setAssignDate(getAssignDate());
+		badgeImpl.setAssignYear(getAssignYear());
+		badgeImpl.setAssignMonth(getAssignMonth());
+		badgeImpl.setAssignDay(getAssignDay());
 		badgeImpl.setToUser(getToUser());
 		badgeImpl.setToUserFullName(getToUserFullName());
 		badgeImpl.setFromUser(getFromUser());
@@ -588,6 +719,8 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		int value = 0;
 
 		value = DateUtil.compareTo(getAssignDate(), badge.getAssignDate());
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -643,6 +776,26 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 		badgeModelImpl._setOriginalBadgeType = false;
 
+		badgeModelImpl._originalAssignYear = badgeModelImpl._assignYear;
+
+		badgeModelImpl._setOriginalAssignYear = false;
+
+		badgeModelImpl._originalAssignMonth = badgeModelImpl._assignMonth;
+
+		badgeModelImpl._setOriginalAssignMonth = false;
+
+		badgeModelImpl._originalAssignDay = badgeModelImpl._assignDay;
+
+		badgeModelImpl._setOriginalAssignDay = false;
+
+		badgeModelImpl._originalToUser = badgeModelImpl._toUser;
+
+		badgeModelImpl._setOriginalToUser = false;
+
+		badgeModelImpl._originalFromUser = badgeModelImpl._fromUser;
+
+		badgeModelImpl._setOriginalFromUser = false;
+
 		badgeModelImpl._columnBitmask = 0;
 	}
 
@@ -695,6 +848,12 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 			badgeCacheModel.assignDate = Long.MIN_VALUE;
 		}
 
+		badgeCacheModel.assignYear = getAssignYear();
+
+		badgeCacheModel.assignMonth = getAssignMonth();
+
+		badgeCacheModel.assignDay = getAssignDay();
+
 		badgeCacheModel.toUser = getToUser();
 
 		badgeCacheModel.toUserFullName = getToUserFullName();
@@ -728,7 +887,7 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{badgeId=");
 		sb.append(getBadgeId());
@@ -748,6 +907,12 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		sb.append(getBadgeType());
 		sb.append(", assignDate=");
 		sb.append(getAssignDate());
+		sb.append(", assignYear=");
+		sb.append(getAssignYear());
+		sb.append(", assignMonth=");
+		sb.append(getAssignMonth());
+		sb.append(", assignDay=");
+		sb.append(getAssignDay());
 		sb.append(", toUser=");
 		sb.append(getToUser());
 		sb.append(", toUserFullName=");
@@ -765,7 +930,7 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.hu.badge.service.model.Badge");
@@ -806,6 +971,18 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 		sb.append(
 			"<column><column-name>assignDate</column-name><column-value><![CDATA[");
 		sb.append(getAssignDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignYear</column-name><column-value><![CDATA[");
+		sb.append(getAssignYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignMonth</column-name><column-value><![CDATA[");
+		sb.append(getAssignMonth());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignDay</column-name><column-value><![CDATA[");
+		sb.append(getAssignDay());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>toUser</column-name><column-value><![CDATA[");
@@ -849,9 +1026,22 @@ public class BadgeModelImpl extends BaseModelImpl<Badge> implements BadgeModel {
 	private long _originalBadgeType;
 	private boolean _setOriginalBadgeType;
 	private Date _assignDate;
+	private Integer _assignYear;
+	private Integer _originalAssignYear;
+	private boolean _setOriginalAssignYear;
+	private Integer _assignMonth;
+	private Integer _originalAssignMonth;
+	private boolean _setOriginalAssignMonth;
+	private Integer _assignDay;
+	private Integer _originalAssignDay;
+	private boolean _setOriginalAssignDay;
 	private long _toUser;
+	private long _originalToUser;
+	private boolean _setOriginalToUser;
 	private String _toUserFullName;
 	private long _fromUser;
+	private long _originalFromUser;
+	private boolean _setOriginalFromUser;
 	private String _fromUserFullName;
 	private String _description;
 	private long _columnBitmask;

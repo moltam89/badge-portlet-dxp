@@ -30,7 +30,7 @@ public class BadgeServiceClp implements BadgeService {
 		_methodName0 = "addBadge";
 
 		_methodParameterTypes0 = new String[] {
-				"java.util.Date", "long", "long", "int", "java.lang.String"
+				"java.util.Calendar", "long", "long", "int", "java.lang.String"
 			};
 
 		_methodName2 = "getOSGiServiceIdentifier";
@@ -47,7 +47,7 @@ public class BadgeServiceClp implements BadgeService {
 	}
 
 	@Override
-	public boolean addBadge(java.util.Date date, long fromUserId,
+	public boolean addBadge(java.util.Calendar date, long fromUserId,
 		long toUserId, int badgeType, java.lang.String description) {
 		Object returnObj = null;
 

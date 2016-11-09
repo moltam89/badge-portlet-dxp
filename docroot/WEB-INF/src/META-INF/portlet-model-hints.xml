@@ -11,6 +11,9 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="badgeType" type="long" />
 		<field name="assignDate" type="Date" />
+		<field name="assignYear" type="Integer" />
+		<field name="assignMonth" type="Integer" />
+		<field name="assignDay" type="Integer" />
 		<field name="toUser" type="long" />
 		<field name="toUserFullName" type="String" />
 		<field name="fromUser" type="long" />

@@ -266,6 +266,263 @@ public class BadgeUtil {
 	}
 
 	/**
+	* Returns all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @return the matching badges
+	*/
+	public static List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser) {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser);
+	}
+
+	/**
+	* Returns a range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param start the lower bound of the range of badges
+	* @param end the upper bound of the range of badges (not inclusive)
+	* @return the range of matching badges
+	*/
+	public static List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser, int start,
+		int end) {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param start the lower bound of the range of badges
+	* @param end the upper bound of the range of badges (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching badges
+	*/
+	public static List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser, int start,
+		int end, OrderByComparator<Badge> orderByComparator) {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BadgeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param start the lower bound of the range of badges
+	* @param end the upper bound of the range of badges (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching badges
+	*/
+	public static List<Badge> findBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser, int start,
+		int end, OrderByComparator<Badge> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching badge
+	* @throws NoSuchBadgeException if a matching badge could not be found
+	*/
+	public static Badge findBybadgeTypeYearMontDayFromTo_First(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser,
+		OrderByComparator<Badge> orderByComparator)
+		throws com.liferay.hu.badge.service.exception.NoSuchBadgeException {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo_First(badgeType,
+			assignYear, assignMonth, assignDay, fromUser, toUser,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching badge, or <code>null</code> if a matching badge could not be found
+	*/
+	public static Badge fetchBybadgeTypeYearMontDayFromTo_First(
+		long badgeType, java.lang.Integer assignYear,
+		java.lang.Integer assignMonth, java.lang.Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator) {
+		return getPersistence()
+				   .fetchBybadgeTypeYearMontDayFromTo_First(badgeType,
+			assignYear, assignMonth, assignDay, fromUser, toUser,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching badge
+	* @throws NoSuchBadgeException if a matching badge could not be found
+	*/
+	public static Badge findBybadgeTypeYearMontDayFromTo_Last(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser,
+		OrderByComparator<Badge> orderByComparator)
+		throws com.liferay.hu.badge.service.exception.NoSuchBadgeException {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo_Last(badgeType,
+			assignYear, assignMonth, assignDay, fromUser, toUser,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching badge, or <code>null</code> if a matching badge could not be found
+	*/
+	public static Badge fetchBybadgeTypeYearMontDayFromTo_Last(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser,
+		OrderByComparator<Badge> orderByComparator) {
+		return getPersistence()
+				   .fetchBybadgeTypeYearMontDayFromTo_Last(badgeType,
+			assignYear, assignMonth, assignDay, fromUser, toUser,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the badges before and after the current badge in the ordered set where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeId the primary key of the current badge
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next badge
+	* @throws NoSuchBadgeException if a badge with the primary key could not be found
+	*/
+	public static Badge[] findBybadgeTypeYearMontDayFromTo_PrevAndNext(
+		long badgeId, long badgeType, java.lang.Integer assignYear,
+		java.lang.Integer assignMonth, java.lang.Integer assignDay,
+		long fromUser, long toUser, OrderByComparator<Badge> orderByComparator)
+		throws com.liferay.hu.badge.service.exception.NoSuchBadgeException {
+		return getPersistence()
+				   .findBybadgeTypeYearMontDayFromTo_PrevAndNext(badgeId,
+			badgeType, assignYear, assignMonth, assignDay, fromUser, toUser,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63; from the database.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	*/
+	public static void removeBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser) {
+		getPersistence()
+			.removeBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser);
+	}
+
+	/**
+	* Returns the number of badges where badgeType = &#63; and assignYear = &#63; and assignMonth = &#63; and assignDay = &#63; and fromUser = &#63; and toUser = &#63;.
+	*
+	* @param badgeType the badge type
+	* @param assignYear the assign year
+	* @param assignMonth the assign month
+	* @param assignDay the assign day
+	* @param fromUser the from user
+	* @param toUser the to user
+	* @return the number of matching badges
+	*/
+	public static int countBybadgeTypeYearMontDayFromTo(long badgeType,
+		java.lang.Integer assignYear, java.lang.Integer assignMonth,
+		java.lang.Integer assignDay, long fromUser, long toUser) {
+		return getPersistence()
+				   .countBybadgeTypeYearMontDayFromTo(badgeType, assignYear,
+			assignMonth, assignDay, fromUser, toUser);
+	}
+
+	/**
 	* Caches the badge in the entity cache if it is enabled.
 	*
 	* @param badge the badge

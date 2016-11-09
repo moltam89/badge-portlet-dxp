@@ -65,7 +65,7 @@ import java.rmi.RemoteException;
  */
 @ProviderType
 public class BadgeServiceSoap {
-	public static boolean addBadge(java.util.Date date, long fromUserId,
+	public static boolean addBadge(java.util.Calendar date, long fromUserId,
 		long toUserId, int badgeType, java.lang.String description)
 		throws RemoteException {
 		try {

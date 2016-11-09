@@ -220,6 +220,48 @@ public interface BadgeModel extends BaseModel<Badge>, GroupedModel, ShardedModel
 	public void setAssignDate(Date assignDate);
 
 	/**
+	 * Returns the assign year of this badge.
+	 *
+	 * @return the assign year of this badge
+	 */
+	public Integer getAssignYear();
+
+	/**
+	 * Sets the assign year of this badge.
+	 *
+	 * @param assignYear the assign year of this badge
+	 */
+	public void setAssignYear(Integer assignYear);
+
+	/**
+	 * Returns the assign month of this badge.
+	 *
+	 * @return the assign month of this badge
+	 */
+	public Integer getAssignMonth();
+
+	/**
+	 * Sets the assign month of this badge.
+	 *
+	 * @param assignMonth the assign month of this badge
+	 */
+	public void setAssignMonth(Integer assignMonth);
+
+	/**
+	 * Returns the assign day of this badge.
+	 *
+	 * @return the assign day of this badge
+	 */
+	public Integer getAssignDay();
+
+	/**
+	 * Sets the assign day of this badge.
+	 *
+	 * @param assignDay the assign day of this badge
+	 */
+	public void setAssignDay(Integer assignDay);
+
+	/**
 	 * Returns the to user of this badge.
 	 *
 	 * @return the to user of this badge

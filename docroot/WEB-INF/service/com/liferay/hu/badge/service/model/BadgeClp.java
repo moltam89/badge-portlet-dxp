@@ -89,6 +89,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("badgeType", getBadgeType());
 		attributes.put("assignDate", getAssignDate());
+		attributes.put("assignYear", getAssignYear());
+		attributes.put("assignMonth", getAssignMonth());
+		attributes.put("assignDay", getAssignDay());
 		attributes.put("toUser", getToUser());
 		attributes.put("toUserFullName", getToUserFullName());
 		attributes.put("fromUser", getFromUser());
@@ -155,6 +158,24 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 
 		if (assignDate != null) {
 			setAssignDate(assignDate);
+		}
+
+		Integer assignYear = (Integer)attributes.get("assignYear");
+
+		if (assignYear != null) {
+			setAssignYear(assignYear);
+		}
+
+		Integer assignMonth = (Integer)attributes.get("assignMonth");
+
+		if (assignMonth != null) {
+			setAssignMonth(assignMonth);
+		}
+
+		Integer assignDay = (Integer)attributes.get("assignDay");
+
+		if (assignDay != null) {
+			setAssignDay(assignDay);
 		}
 
 		Long toUser = (Long)attributes.get("toUser");
@@ -415,6 +436,75 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 	}
 
 	@Override
+	public Integer getAssignYear() {
+		return _assignYear;
+	}
+
+	@Override
+	public void setAssignYear(Integer assignYear) {
+		_assignYear = assignYear;
+
+		if (_badgeRemoteModel != null) {
+			try {
+				Class<?> clazz = _badgeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAssignYear", Integer.class);
+
+				method.invoke(_badgeRemoteModel, assignYear);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Integer getAssignMonth() {
+		return _assignMonth;
+	}
+
+	@Override
+	public void setAssignMonth(Integer assignMonth) {
+		_assignMonth = assignMonth;
+
+		if (_badgeRemoteModel != null) {
+			try {
+				Class<?> clazz = _badgeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAssignMonth", Integer.class);
+
+				method.invoke(_badgeRemoteModel, assignMonth);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Integer getAssignDay() {
+		return _assignDay;
+	}
+
+	@Override
+	public void setAssignDay(Integer assignDay) {
+		_assignDay = assignDay;
+
+		if (_badgeRemoteModel != null) {
+			try {
+				Class<?> clazz = _badgeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAssignDay", Integer.class);
+
+				method.invoke(_badgeRemoteModel, assignDay);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getToUser() {
 		return _toUser;
 	}
@@ -599,6 +689,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setBadgeType(getBadgeType());
 		clone.setAssignDate(getAssignDate());
+		clone.setAssignYear(getAssignYear());
+		clone.setAssignMonth(getAssignMonth());
+		clone.setAssignDay(getAssignDay());
 		clone.setToUser(getToUser());
 		clone.setToUserFullName(getToUserFullName());
 		clone.setFromUser(getFromUser());
@@ -613,6 +706,8 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		int value = 0;
 
 		value = DateUtil.compareTo(getAssignDate(), badge.getAssignDate());
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -664,7 +759,7 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{badgeId=");
 		sb.append(getBadgeId());
@@ -684,6 +779,12 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		sb.append(getBadgeType());
 		sb.append(", assignDate=");
 		sb.append(getAssignDate());
+		sb.append(", assignYear=");
+		sb.append(getAssignYear());
+		sb.append(", assignMonth=");
+		sb.append(getAssignMonth());
+		sb.append(", assignDay=");
+		sb.append(getAssignDay());
 		sb.append(", toUser=");
 		sb.append(getToUser());
 		sb.append(", toUserFullName=");
@@ -701,7 +802,7 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.hu.badge.service.model.Badge");
@@ -744,6 +845,18 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 		sb.append(getAssignDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>assignYear</column-name><column-value><![CDATA[");
+		sb.append(getAssignYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignMonth</column-name><column-value><![CDATA[");
+		sb.append(getAssignMonth());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>assignDay</column-name><column-value><![CDATA[");
+		sb.append(getAssignDay());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>toUser</column-name><column-value><![CDATA[");
 		sb.append(getToUser());
 		sb.append("]]></column-value></column>");
@@ -778,6 +891,9 @@ public class BadgeClp extends BaseModelImpl<Badge> implements Badge {
 	private Date _modifiedDate;
 	private long _badgeType;
 	private Date _assignDate;
+	private Integer _assignYear;
+	private Integer _assignMonth;
+	private Integer _assignDay;
 	private long _toUser;
 	private String _toUserFullName;
 	private long _fromUser;

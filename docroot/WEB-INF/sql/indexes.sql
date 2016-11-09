@@ -1,4 +1,4 @@
-create index IX_63B2A40C on BadgePortlet_Badge (badgeType);
+create index IX_4D03C6AB on BadgePortlet_Badge (badgeType, assignYear, assignMonth, assignDay, fromUser, toUser);
 
 create index IX_8242E958 on BadgePortlet_Subscriber (subscriberUserId);
 

@@ -43,6 +43,9 @@ public class BadgeSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setBadgeType(model.getBadgeType());
 		soapModel.setAssignDate(model.getAssignDate());
+		soapModel.setAssignYear(model.getAssignYear());
+		soapModel.setAssignMonth(model.getAssignMonth());
+		soapModel.setAssignDay(model.getAssignDay());
 		soapModel.setToUser(model.getToUser());
 		soapModel.setToUserFullName(model.getToUserFullName());
 		soapModel.setFromUser(model.getFromUser());
@@ -172,6 +175,30 @@ public class BadgeSoap implements Serializable {
 		_assignDate = assignDate;
 	}
 
+	public Integer getAssignYear() {
+		return _assignYear;
+	}
+
+	public void setAssignYear(Integer assignYear) {
+		_assignYear = assignYear;
+	}
+
+	public Integer getAssignMonth() {
+		return _assignMonth;
+	}
+
+	public void setAssignMonth(Integer assignMonth) {
+		_assignMonth = assignMonth;
+	}
+
+	public Integer getAssignDay() {
+		return _assignDay;
+	}
+
+	public void setAssignDay(Integer assignDay) {
+		_assignDay = assignDay;
+	}
+
 	public long getToUser() {
 		return _toUser;
 	}
@@ -221,6 +248,9 @@ public class BadgeSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _badgeType;
 	private Date _assignDate;
+	private Integer _assignYear;
+	private Integer _assignMonth;
+	private Integer _assignDay;
 	private long _toUser;
 	private String _toUserFullName;
 	private long _fromUser;
