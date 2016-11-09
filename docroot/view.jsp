@@ -39,15 +39,23 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.02</b> portlet.
+This is the <b>Badge v0.21</b> portlet.
 
 <%
 	OrderByComparator obc = (OrderByComparator)
 		OrderByComparatorFactoryUtil.create("User", "fullName", true);
 
-	List<User> usersTmp = UserLocalServiceUtil.getUsers(-1, -1);
 	List<User> users = new ArrayList<User>();
-	users.addAll(usersTmp);
+	{
+		List<User> usersTmp = UserLocalServiceUtil.getUsers(-1, -1);
+
+		for (User user: usersTmp) {
+			if (user.isActive()) {
+				users.add(user);
+			}
+		}
+	}
+
 	Collections.sort(users, obc);
 
 	int badgeType = BadgePortlet.getBadgeType(portletPreferences);
