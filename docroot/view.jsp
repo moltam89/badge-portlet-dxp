@@ -39,7 +39,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.21</b> portlet.
+This is the <b>Badge v0.22</b> portlet.
 
 <%
 	OrderByComparator obc = (OrderByComparator)
@@ -128,7 +128,9 @@ This is the <b>Badge v0.21</b> portlet.
 		%>
 	</aui:select>
 
-	<aui:input name="description"></aui:input>
+	<aui:input name="description">
+		<aui:validator name="maxLength">128</aui:validator>
+	</aui:input>
 
 	<aui:input type="submit" name="addBadgeSubmit" value="<%= LanguageUtil.get(request, "add-badge") %>" label="add-badge"></aui:input>
 </aui:form>
