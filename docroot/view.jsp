@@ -39,7 +39,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.23</b> portlet.
+This is the <b>Badge v0.24</b> portlet.
 
 <%
 	OrderByComparator obc = (OrderByComparator)
