@@ -39,7 +39,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>Badge v0.24</b> portlet.
+This is the <b>Badge v0.25</b> portlet.
 
 <%
 	OrderByComparator obc = (OrderByComparator)
@@ -71,6 +71,9 @@ This is the <b>Badge v0.24</b> portlet.
 	}
 
 	boolean isSubscribed = SubscriberServiceUtil.isSubscribed();
+
+	//http://stackoverflow.com/questions/8413353/why-does-liferay-6-0-6-include-the-portlet-action-parameter-in-the-post-render-u
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
 <portlet:actionURL var="addBadgeURL" name="addBadgeAction"></portlet:actionURL>
@@ -81,6 +84,7 @@ This is the <b>Badge v0.24</b> portlet.
 		onChange="Liferay.Service('/badge-portlet.subscriber/subscribe',function() {});"
 	>
 	</aui:input>
+	<aui:input type="hidden" name="redirect" value="<%= redirect %>"></aui:input>
 </aui:form>
 
  

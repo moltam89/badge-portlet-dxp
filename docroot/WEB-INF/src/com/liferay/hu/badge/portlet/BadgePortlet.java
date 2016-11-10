@@ -85,6 +85,8 @@ public class BadgePortlet extends MVCPortlet {
 		Emails.notifySubscribers(
 			SubscriberServiceUtil.getSubscribers(), fromUserId, toUserId,
 			badgeType, request);
+
+		sendRedirect(request, actionResponse);
 	}
 
 	public void editPreferencesAction(ActionRequest request, ActionResponse response)
